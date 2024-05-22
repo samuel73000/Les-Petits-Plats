@@ -1,27 +1,52 @@
-body{
-    padding: 0;
-    margin: 0;
+body {
+  padding: 0;
+  margin: 0;
 }
-.header{
-    width: 100%;
-    height: 960px;
-    position:absolute;
-    background-image: url("Asset/img-fond.jpeg");
-    background-size: cover; 
-    background-position: center; 
+.header {
+  width: 100%;
+  height: 960px;
+  position: absolute;
+  background-image: url("Asset/img-fond.jpeg");
+  background-size: cover;
+  background-position: center;
 }
-.logo-header{
-    position: absolute;
-    top: 51px;
-    left: 69px;
+.logo-header {
+  position: absolute;
+  top: 51px;
+  left: 69px;
 }
-.container-titre-header{
-    width: 100%;/* on mais la meme width que l'img pour que la div sois au millieu*/
-    height: 960px;/* on mais la meme height que l'img pour que la div sois au millieu*/
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    
-
+.container-titre-header {
+  width: 100%; /* on mais la meme width que l'img pour que la div sois au millieu*/
+  height: 960px; /* on mais la meme height que l'img pour que la div sois au millieu*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.titre-header {
+  font-size: 44px;
+  font-weight: 400;
+  font-family: "Anton", sans-serif;
+  color: Yellow;
+  text-align: center;
+  width: 40%;
+}
+.container-input-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.input-header {
+  width: 45%;
+  height: 72px;
+  border-radius: 10px;
+}
+.bouton-input-header {
+  width: 51px;
+  height: 52px;
+  background-color: #1b1b1b;
+  color: white;
+  transform: translate(-65px, 25%);
+  border-radius: 10px;
+  font-size: 27px;
 }
