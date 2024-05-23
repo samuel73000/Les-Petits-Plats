@@ -28,7 +28,7 @@ body {
   font-size: 44px;
   font-weight: 400;
   font-family: "Anton", sans-serif;
-  color: Yellow;
+  color: #FFD15B;
   text-align: center;
   width: 40%;
 }
@@ -42,6 +42,12 @@ body {
   height: 72px;
   border-radius: 10px;
 }
+.input-header::placeholder {
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "Manrope", sans-serif;
+  color: #7A7A7A;
+}
 .bouton-input-header {
   width: 51px;
   height: 52px;
@@ -50,6 +56,14 @@ body {
   transform: translate(-65px, 25%);
   border-radius: 10px;
   font-size: 27px;
+  transition: 0.7s;
+  border: 0px;
+  cursor: pointer;
+}
+.bouton-input-header:hover{
+  background-color: #FFD15B;
+  color: black;
+
 }
 
 /* body filtre */
