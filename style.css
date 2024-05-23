@@ -6,7 +6,7 @@ body {
 /* header */
 .header {
   width: 100%;
-  height: 960px;
+  height: 667px;
   background-image: url("Asset/img-fond.jpeg");
   background-size: cover;
   background-position: center;
@@ -18,7 +18,7 @@ body {
 }
 .container-titre-header {
   width: 100%; /* on mais la meme width que l'img pour que la div sois au millieu*/
-  height: 960px; /* on mais la meme height que l'img pour que la div sois au millieu*/
+  height: 667px; /* on mais la meme height que l'img pour que la div sois au millieu*/
   display: flex;
   justify-content: center;
   align-items: center;
@@ -97,6 +97,7 @@ gap: 10%;
     flex-basis: calc(33.33% - (66px * 2)); /* Largeur de chaque élément (1/3 de l'espace disponible moins les espaces entre les éléments) */
 }
 .container-recette{
+    position: relative;
     margin-bottom: 66px;
     width: 360px;
     height: 731px;
@@ -110,6 +111,19 @@ gap: 10%;
     object-fit: cover;
     border-radius: 21px 21px 0 0 ;
 }
+.timer-recette{
+    position: absolute;
+    top: 21px;
+    right: 21px;
+    width: 40px;
+    padding:5px 15px 5px 15px ;
+    border-radius: 14px;
+    background-color: #FFD15B;
+    font-family: "Manrope", sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: center;
+    }
 .description-recette{
     padding: 25px;
 }
