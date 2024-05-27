@@ -1,4 +1,5 @@
 let globalData = null;
+// fonction pour recuperer les données
 async function fetchData() {
   try {
     // Effectue une requête fetch pour obtenir les données depuis le fichier 'recipes.js'
@@ -15,18 +16,25 @@ async function fetchData() {
     console.log(error);
   }
 }
+// function pour afficher les recettes dans le DOM
 function displayData() {
   // Sélectionne le conteneur principal pour toutes les recettes
   const containerRecetteAll = document.querySelector(".container-recette-all");
-  
+//   selectionner le nombre de recette
+  const nombreRecette = document.querySelector(".nombre-recette");
+
   // Appelle fetchData et attend sa résolution avant de continuer
   fetchData().then(() => {
     // Itère sur chaque élément de globalData (chaque recette)
     globalData.forEach((element) => {
+        // on affiche combien de recette il y a sur la page
+        nombreRecette.textContent = globalData.length+" recettes";
       // Crée un nouvel élément 'article' pour chaque recette
       const NewArticleRecette = document.createElement("article");
       // Ajoute une classe pour le style
       NewArticleRecette.classList.add("container-recette");
+      // Ajoute un id
+      NewArticleRecette.setAttribute("id", element.id);
       // Initialise une variable pour construire le HTML des ingrédients
       let ingredientsHTML = "";
       // Boucle sur chaque ingrédient de la recette
@@ -63,4 +71,9 @@ function displayData() {
     });
   });
 }
-displayData();
+
+
+function init() {
+    displayData();
+}
+init();
