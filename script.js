@@ -16,6 +16,8 @@ async function fetchData() {
     console.log(error);
   }
 }
+
+
 // function pour afficher les recettes dans le DOM
 function displayData() {
   // Sélectionne le conteneur principal pour toutes les recettes
@@ -71,6 +73,7 @@ function displayData() {
     });
   });
 }
+
 
 
 function init() {
