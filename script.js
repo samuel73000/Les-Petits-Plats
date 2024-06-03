@@ -1,24 +1,42 @@
-import { displayData } from "./js/display.js";
-import { fetchData } from "./js/api.js";
-//  import {filtrageInput}
-// let globalData = null;
-// 20;
+import { displayData } from "./js/display.js"; // Importation de la fonction displayData depuis le fichier display.js
+import { fetchData } from "./js/api.js"; // Importation de la fonction fetchData depuis le fichier api.js
+import {filtrageInput} from "./js/filtrage.js"; // Importation commentée de la fonction filtrageInput
+const globalData = await fetchData(); // Appel asynchrone à fetchData pour récupérer les données et les stocker dans globalData
 
-const globalData = await fetchData();
 let filteredData = [];
-let tagsIngredients = [];
-let tagsUstensils = [];
+let tagsIngredients = []; // Initialisation d'un tableau pour les tags des ingrédients
+let tagsAppareils = []; // Initialisation d'un tableau pour les tags des appareils
+let tagsUstensils = []; // Initialisation d'un tableau pour les tags des ustensiles
 
-function init() {
-  displayData(globalData);
+async function init() {
+  
+  displayData(globalData); 
+  filtrageInput(globalData, filteredData => {
+    if (filteredData.length  !== 0) {
+      displayData(filteredData);  // Affiche les données filtrées si non vides
+      console.log(filteredData);
+    } else {
+      displayData(globalData);  // Réaffiche globalData si aucun résultat filtré
+    }
+  });
+
 }
-init();
 
-const input = document.querySelector(".input-search");
+init(); // Exécution de la fonction init au chargement du script
 
-// Add event listener to the input element
-input.addEventListener("input", (e) => {
-  sou;
-  const dataFiltrees = filtrageInput(e.target.value);
-  displayData(dataFiltrees);
-});
+
+
+
+
+
+
+// EXEMPLE DE COMMENT METTRE LES ADD EVENT LISTENER DES FILTRE
+
+// const input = document.querySelector(".input-search"); // Sélection de l'élément input pour la recherche
+
+// // Ajout d'un écouteur d'événements sur l'élément input pour réagir à chaque saisie de l'utilisateur
+// input.addEventListener("input", (e) => {
+//   // La valeur de la fonction displayData change pour afficher les cartes filtrées
+//   const dataFiltrees = filtrageInput(e.target.value);
+//   displayData(dataFiltrees);
+// });

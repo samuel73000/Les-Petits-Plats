@@ -5,6 +5,9 @@ export function displayData(globalData) {
   //   selectionner le nombre de recette
   const nombreRecette = document.querySelector(".nombre-recette");
 
+  // Efface le contenu précédent du conteneur
+  containerRecetteAll.innerHTML = '';
+
   // Appelle fetchData et attend sa résolution avant de continuer
   //   fetchData().then(() => {
   // Itère sur chaque élément de globalData (chaque recette)
