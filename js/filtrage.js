@@ -1,25 +1,44 @@
 export function filtrageInput(globalData, callback) {
+  // Sélection des éléments du DOM pour l'input et le bouton
   const inputMain = document.querySelector(".input-header");
   const boutonInputHeader = document.querySelector(".bouton-input-header");
 
+  // Ajout d'un écouteur d'événement sur le clic du bouton
   boutonInputHeader.addEventListener("click", () => {
+    // Récupération de la valeur de l'input
     const value = inputMain.value;
-    let filteredData = []; // Utilisez let pour déclarer filteredData localement
+    let filteredData = []; // Déclaration d'un tableau pour stocker les données filtrées
+
+    // Vérification que la valeur saisie contient au moins 3 caractères
     if (value.length >= 3) {
-      filteredData = globalData.filter((item) =>
+      // Filtrage des données par nom
+      let filteredByName = globalData.filter((item) =>
         item.name.toLowerCase().includes(value.toLowerCase())
       );
-      filteredData = globalData.filter((item) =>
-      item.description.toLowerCase().includes(value.toLowerCase())
+
+      // Filtrage des données par description
+      let filteredByDescription = globalData.filter((item) =>
+        item.description.toLowerCase().includes(value.toLowerCase())
       );
-    //   filteredData = globalData.filter((item) =>
-    //   item.ingredients.ingredient.toLowerCase().includes(value.toLowerCase())
-    //   );
+
+      // Filtrage des données par ingrédients
+      let filteredByIngredients = globalData.filter((item) =>
+        item.ingredients.some(ingredient =>
+          ingredient.ingredient.toLowerCase().includes(value.toLowerCase())
+        )
+      );
+
+      // Combinaison des résultats des trois filtres en éliminant les doublons
+      filteredData = [...new Set([...filteredByName, ...filteredByDescription, ...filteredByIngredients])];
     }
+    // Affichage des données filtrées dans la console
     console.log(filteredData);
-    callback(filteredData); // Appel du callback avec les données filtrées
+    // Appel du callback avec les données filtrées pour traitement ultérieur
+    callback(filteredData);
   });
 }
+
+
 
 // il que on fasse un .filtre sur la value de l'input puis que on recheche dans les card si on a une
 // correspondance avec les titre , ingédiants ou les discription . si on a un correspondance on push dans le tableau filteredData
