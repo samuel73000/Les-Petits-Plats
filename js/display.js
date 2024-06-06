@@ -8,8 +8,7 @@ export function displayData(globalData) {
   // Efface le contenu précédent du conteneur
   containerRecetteAll.innerHTML = '';
 
-  // Appelle fetchData et attend sa résolution avant de continuer
-  //   fetchData().then(() => {
+
   // Itère sur chaque élément de globalData (chaque recette)
   globalData.forEach((element) => {
     // on affiche combien de recette il y a sur la page
@@ -54,5 +53,4 @@ export function displayData(globalData) {
 
     containerRecetteAll.appendChild(NewArticleRecette);
   });
-  //   });
 }
