@@ -81,6 +81,7 @@ body {
   gap: 10%;
 }
 .container-filtre {
+  position: relative;
   width: 179px;
   height: 22px;
   font-family: "Manrope", sans-serif;
@@ -91,7 +92,33 @@ body {
   justify-content: space-between;
   margin-top: 21px;
   background-color: white;
+  display: flex;
+  flex-direction: column;
 }
+.flecheSelect{
+  position: absolute;
+  right: 10%;
+}
+.div-modal-select{
+
+}
+.input-select{
+
+}
+.div-modal-select-ingrediants{
+
+}
+.div-modal-select-ustensiles{
+
+}
+.div-modal-select-appliance{
+
+}
+
+.invisible{
+  display: none;
+}
+
 .nombre-recette {
   text-align: end;
   width: 39%;

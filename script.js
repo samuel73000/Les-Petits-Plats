@@ -2,7 +2,7 @@
 // Il importe et utilise des fonctions depuis d'autres modules pour afficher et filtrer les données.
 
 // Importation de la fonction displayData depuis le fichier display.js
-import { displayData } from "./js/display.js"; 
+import { displayData , SelectFilterTag} from "./js/display.js"; 
 
 // Importation de la fonction fetchData depuis le fichier api.js
 import { fetchData } from "./js/api.js"; 
@@ -26,7 +26,8 @@ let tagsUstensils = [];
 async function init() {
   // Affichage des données initiales récupérées
   displayData(globalData); 
-
+  // Appel à SelectFilterTag pour afficher le select des tags des ingrédients
+  SelectFilterTag(globalData);
   // Appel à filtrageInput pour filtrer les données en fonction des entrées utilisateur
   filtrageInput(globalData, filteredData => {
     // Vérification si des données filtrées existent
@@ -41,14 +42,7 @@ async function init() {
 // Exécution de la fonction init au chargement du script
 init(); 
 
-// EXEMPLE DE COMMENT METTRE LES ADD EVENT LISTENER DES FILTRE
 
-// Sélection de l'élément input pour la recherche
-// const input = document.querySelector(".input-search"); 
 
-// Ajout d'un écouteur d'événements sur l'élément input pour réagir à chaque saisie de l'utilisateur
-// input.addEventListener("input", (e) => {
-//   // Filtrage des données en fonction de la valeur saisie et mise à jour de l'affichage
-//   const dataFiltrees = filtrageInput(e.target.value);
-//   displayData(dataFiltrees);
-// });
+
+
