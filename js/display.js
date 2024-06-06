@@ -56,6 +56,11 @@ export function displayData(globalData) {
 
 }
 
+
+
+
+
+
 // on fait les select pour les filtres de tag 
 export function SelectFilterTag(globalData){
   //on recupere tous les ingredients dans un set
@@ -102,7 +107,7 @@ globalData.forEach((element) => {
 
 // creation de la modal ouverte
 const divModalSelect = document.createElement("div"); // creation d'un div
-divModalSelect.classList.add("div-modal-select"); // on ajoute la classe pour le style
+divModalSelect.classList.add("div-modal-select" , "invisible"); // on ajoute la classe pour le style
 container.appendChild(divModalSelect); // on ajoute le div dans le container
 
 const inputSelect = document.createElement("input"); // creation d'un input
