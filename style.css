@@ -83,11 +83,11 @@ body {
 .container-filtre {
   position: relative;
   width: 179px;
-  height: 22px;
+  height: 20px;
   font-family: "Manrope", sans-serif;
   border-radius: 11px;
   padding: 17px 16px 17px 16px;
-  border: solid 1px gray;
+  border: solid 1px rgb(190, 190, 190);
   display: flex;
   justify-content: space-between;
   margin-top: 21px;
@@ -100,20 +100,31 @@ body {
   right: 10%;
 }
 .div-modal-select{
-
+  z-index: 1000;
+  width: 179px;
+margin-left: -17px;
+  height: auto;
+  padding: 17px 16px 17px 16px;
+  background-color: white;
+  border: solid 1px rgb(190, 190, 190);
+  border-top: 0;
+  border-radius: 0 0 11px 11px;
 }
 .input-select{
-
+height:30px;
+border: solid 1px rgb(190, 190, 190);
 }
-.div-modal-select-ingrediants{
-
+.div-modal-select-ingrediants, .div-modal-select-ustensiles, .div-modal-select-appliance {
+  overflow-y: auto;
+  height: 200px;
+  scrollbar-width: none; /* pour Firefox */
+  -ms-overflow-style: none; /* pour Internet Explorer et Edge */
 }
-.div-modal-select-ustensiles{
 
+.div-modal-select-ingrediants::-webkit-scrollbar, .div-modal-select-ustensiles::-webkit-scrollbar, .div-modal-select-appliance::-webkit-scrollbar {
+  display: none; /* pour Chrome, Safari et Opera */
 }
-.div-modal-select-appliance{
 
-}
 
 .invisible{
   display: none;

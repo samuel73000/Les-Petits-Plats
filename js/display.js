@@ -148,7 +148,7 @@ applianceSet.forEach(appliance => {// Utilisation de forEach pour parcourir le S
 
 
     // Ajouter l'écouteur d'événements à chaque container individuellement
-    container.addEventListener("click", () => {
+    SelectFleche.addEventListener("click", () => {
       SelectFleche.classList.toggle("fa-chevron-down");
       SelectFleche.classList.toggle("fa-chevron-up");
       divModalSelect.classList.toggle("invisible");
