@@ -110,16 +110,28 @@ body {
   border: solid 1px rgb(190, 190, 190);
   border-top: 0;
   border-radius: 0 0 11px 11px;
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+  opacity: 0;
+  transform: scaleY(0); /* Commencez complètement aplati */
+  transform-origin: top; /* Définissez l'origine de la transformation au haut */
+  visibility: hidden;
+}
+.div-modal-select.visible {
+  opacity: 1;
+  transform: scaleY(1); /* Étendez à la taille normale */
+  visibility: visible;
+  transition-delay: 0s;
 }
 .input-select {
   height: 30px;
   border: solid 1px rgb(190, 190, 190);
 }
-.loupe-for-input{
+.loupe-for-input {
   position: absolute;
   right: 15%;
   top: 120%;
   color: rgb(190, 190, 190);
+  cursor: pointer;
 }
 .div-modal-select-ingrediants,
 .div-modal-select-ustensiles,
@@ -135,14 +147,12 @@ body {
 .div-modal-select-appliance::-webkit-scrollbar {
   display: none; /* pour Chrome, Safari et Opera */
 }
-
-
-
-
-
-.invisible {
-  display: none;
+.p-select-tag {
+  cursor: pointer;
+  font-weight: 400;
 }
+
+
 
 .nombre-recette {
   text-align: end;
