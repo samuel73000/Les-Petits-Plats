@@ -1,7 +1,7 @@
 body {
   padding: 0;
   margin: 0;
-  background-color:#EDEDED;
+  background-color: #ededed;
 }
 /* header */
 .header {
@@ -28,7 +28,7 @@ body {
   font-size: 44px;
   font-weight: 400;
   font-family: "Anton", sans-serif;
-  color: #FFD15B;
+  color: #ffd15b;
   text-align: center;
   width: 40%;
 }
@@ -42,13 +42,12 @@ body {
   height: 72px;
   border-radius: 10px;
   padding-left: 3%;
-
 }
 .input-header::placeholder {
   font-size: 16px;
   font-weight: 400;
   font-family: "Manrope", sans-serif;
-  color: #7A7A7A;
+  color: #7a7a7a;
 }
 .bouton-input-header {
   width: 51px;
@@ -62,10 +61,9 @@ body {
   border: 0px;
   cursor: pointer;
 }
-.bouton-input-header:hover{
-  background-color: #FFD15B;
+.bouton-input-header:hover {
+  background-color: #ffd15b;
   color: black;
-
 }
 
 /* body filtre */
@@ -94,15 +92,18 @@ body {
   background-color: white;
   display: flex;
   flex-direction: column;
+  font-size: 16px;
+  font-weight: 500;
 }
-.flecheSelect{
+.flecheSelect {
   position: absolute;
   right: 10%;
+  color: rgb(190, 190, 190);
 }
-.div-modal-select{
+.div-modal-select {
   z-index: 1000;
   width: 179px;
-margin-left: -17px;
+  margin-left: -17px;
   height: auto;
   padding: 17px 16px 17px 16px;
   background-color: white;
@@ -110,23 +111,36 @@ margin-left: -17px;
   border-top: 0;
   border-radius: 0 0 11px 11px;
 }
-.input-select{
-height:30px;
-border: solid 1px rgb(190, 190, 190);
+.input-select {
+  height: 30px;
+  border: solid 1px rgb(190, 190, 190);
 }
-.div-modal-select-ingrediants, .div-modal-select-ustensiles, .div-modal-select-appliance {
+.loupe-for-input{
+  position: absolute;
+  right: 15%;
+  top: 120%;
+  color: rgb(190, 190, 190);
+}
+.div-modal-select-ingrediants,
+.div-modal-select-ustensiles,
+.div-modal-select-appliance {
   overflow-y: auto;
   height: 200px;
   scrollbar-width: none; /* pour Firefox */
   -ms-overflow-style: none; /* pour Internet Explorer et Edge */
 }
 
-.div-modal-select-ingrediants::-webkit-scrollbar, .div-modal-select-ustensiles::-webkit-scrollbar, .div-modal-select-appliance::-webkit-scrollbar {
+.div-modal-select-ingrediants::-webkit-scrollbar,
+.div-modal-select-ustensiles::-webkit-scrollbar,
+.div-modal-select-appliance::-webkit-scrollbar {
   display: none; /* pour Chrome, Safari et Opera */
 }
 
 
-.invisible{
+
+
+
+.invisible {
   display: none;
 }
 
@@ -139,94 +153,94 @@ border: solid 1px rgb(190, 190, 190);
   transform: translate(0px, 29%);
 }
 /* body recette */
-.container-recette-all{
-    margin-top: 55px;
-padding-left: 5.5%;
-padding-right: 5.5%;
-display: flex;
-flex-wrap: wrap;
-gap: 10%;
+.container-recette-all {
+  margin-top: 55px;
+  padding-left: 5.5%;
+  padding-right: 5.5%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10%;
 }
 .container-recette-all > * {
-    flex-basis: calc(33.33% - (66px * 2)); /* Largeur de chaque élément (1/3 de l'espace disponible moins les espaces entre les éléments) */
+  flex-basis: calc(
+    33.33% - (66px * 2)
+  ); /* Largeur de chaque élément (1/3 de l'espace disponible moins les espaces entre les éléments) */
 }
-.container-recette{
-    position: relative;
-    margin-bottom: 66px;
-    width: 360px;
-    height: 731px;
-    border-radius: 21px;
-    background-color: white;
-
+.container-recette {
+  position: relative;
+  margin-bottom: 66px;
+  width: 360px;
+  height: 731px;
+  border-radius: 21px;
+  background-color: white;
 }
-.img-recette{
-    width: 100%;
-    height: 253px;
-    object-fit: cover;
-    border-radius: 21px 21px 0 0 ;
+.img-recette {
+  width: 100%;
+  height: 253px;
+  object-fit: cover;
+  border-radius: 21px 21px 0 0;
 }
-.timer-recette{
-    position: absolute;
-    top: 21px;
-    right: 21px;
-    width: 40px;
-    padding:5px 15px 5px 15px ;
-    border-radius: 14px;
-    background-color: #FFD15B;
-    font-family: "Manrope", sans-serif;
-    font-size: 12px;
-    font-weight: 400;
-    text-align: center;
-    }
-.description-recette{
-    padding: 25px;
+.timer-recette {
+  position: absolute;
+  top: 21px;
+  right: 21px;
+  width: 40px;
+  padding: 5px 15px 5px 15px;
+  border-radius: 14px;
+  background-color: #ffd15b;
+  font-family: "Manrope", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: center;
 }
-.nom-de-recette{
-    margin-top:-10px;
-    font-size: 18px;
-    font-weight: 400;
-    font-family: "Anton", sans-serif;
+.description-recette {
+  padding: 25px;
 }
-.titre-recette{
-    font-family: "Manrope", sans-serif;
- font-weight: 700;
- font-size: 12px;
- color: #7A7A7A;
- letter-spacing: 0.8px;
- margin-top: 30px;
+.nom-de-recette {
+  margin-top: -10px;
+  font-size: 18px;
+  font-weight: 400;
+  font-family: "Anton", sans-serif;
 }
-.instruction-recette{
+.titre-recette {
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  color: #7a7a7a;
+  letter-spacing: 0.8px;
+  margin-top: 30px;
+}
+.instruction-recette {
   font-family: "Manrope", sans-serif;
   font-weight: 400;
   font-size: 14px;
-  color: #1B1B1B;
+  color: #1b1b1b;
   margin-bottom: 40px;
   max-height: 100px;
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp:4; 
+  -webkit-line-clamp: 4;
   text-overflow: ellipsis;
 }
 
-
 .container-ingredients-recette {
-    padding: 25px;
-    margin-top: -60px;
-display: grid;
-grid-template-columns: auto auto; /* Deux colonnes de largeur automatique */
-grid-template-rows: auto auto auto; /* Trois lignes de hauteur automatique */
-}   
-.titre-ingredients{
-    font-family: "Manrope", sans-serif;
-    font-weight: 500;
-    font-size: 14px;
-    color: #1B1B1B;
-    margin-bottom: -15px;
+  padding: 25px;
+  margin-top: -60px;
+  display: grid;
+  grid-template-columns: auto auto; /* Deux colonnes de largeur automatique */
+  grid-template-rows: auto auto auto; /* Trois lignes de hauteur automatique */
 }
-.ingredients{
-    font-family: "Manrope", sans-serif;
-    font-weight: 400;
-    font-size: 14px;
-    color: #7A7A7A;
+.titre-ingredients {
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: #1b1b1b;
+  margin-bottom: -15px;
+}
+.ingredients {
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #7a7a7a;
 }

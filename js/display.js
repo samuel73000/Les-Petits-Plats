@@ -109,6 +109,10 @@ const inputSelect = document.createElement("input"); // creation d'un input
 inputSelect.classList.add("input-select"); // on ajoute la classe pour le style
 divModalSelect.appendChild(inputSelect); // on ajoute l'input dans le div 
 
+const LoupeForInput = document.createElement("i"); // creation d'un icone loupe
+LoupeForInput.classList.add("fa-solid", "fa-magnifying-glass" , "loupe-for-input"); // on ajoute la classe pour le style
+divModalSelect.appendChild(LoupeForInput); // on ajoute le loupe dans l'input
+
 //on verfie si c'est le premier élément et on crée la div pour les ingrediants
 if (index === 0) { 
   const divModalSelectIgrediants = document.createElement("div"); // creation d'un div
@@ -116,9 +120,10 @@ if (index === 0) {
   divModalSelect.appendChild(divModalSelectIgrediants); // on ajoute le div dans le divModalSelect
 
 ingredientsSet.forEach(ingredient => {// Utilisation de forEach pour parcourir le Set et ajouter les ingrediants dans la div
-  const p = document.createElement("p"); // on cree un "p"
-  p.textContent = ingredient; // on ajoute le texte dans le "p"
-  divModalSelectIgrediants.appendChild(p); // on ajoute le "p" dans le div
+  const pSelectTag = document.createElement("p"); // on cree un "p"
+  pSelectTag.classList.add("p-select-tag"); // on ajoute la classe pour le style
+  pSelectTag.textContent = ingredient; // on ajoute le texte dans le "p"
+  divModalSelectIgrediants.appendChild(pSelectTag); // on ajoute le "p" dans le div
 });
 }
 //on verfie si c'est le deuxieme élément et on crée la div pour les ustensiles
@@ -128,9 +133,10 @@ if (index === 1) {
   divModalSelect.appendChild(divModalSelectUstensiles); // on ajoute le div dans le divModalSelect
 
 ustensilesSet.forEach(ustensils => {// Utilisation de forEach pour parcourir le Set et ajouter les ustensiles dans la div
-  const p = document.createElement("p"); // on cree un "p"
-  p.textContent = ustensils; // on ajoute le texte dans le "p"
-  divModalSelectUstensiles.appendChild(p); // on ajoute le "p" dans le div
+  const pSelectTag = document.createElement("p"); // on cree un "p"
+  pSelectTag.classList.add("p-select-tag"); // on ajoute la classe pour le style
+  pSelectTag.textContent = ustensils; // on ajoute le texte dans le "p"
+  divModalSelectUstensiles.appendChild(pSelectTag); // on ajoute le "p" dans le div
 });
 }
 //on verfie si c'est le troisieme élément et on crée la div pour les apareils
@@ -140,9 +146,10 @@ if (index === 2) {
   divModalSelect.appendChild(divModalSelectAppliance); // on ajoute le div dans le divModalSelect
 
 applianceSet.forEach(appliance => {// Utilisation de forEach pour parcourir le Set et ajouter les ustensiles dans la div
-  const p = document.createElement("p"); // on cree un "p"
-  p.textContent = appliance; // on ajoute le texte dans le "p"
-  divModalSelectAppliance.appendChild(p); // on ajoute le "p" dans le div
+  const pSelectTag = document.createElement("p"); // on cree un "p"
+  pSelectTag.classList.add("p-select-tag"); // on ajoute la classe pour le style
+  pSelectTag.textContent = appliance; // on ajoute le texte dans le "p"
+  divModalSelectAppliance.appendChild(pSelectTag); // on ajoute le "p" dans le div
 });
 }
 
