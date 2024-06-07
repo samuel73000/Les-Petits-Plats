@@ -129,7 +129,7 @@ body {
 .loupe-for-input {
   position: absolute;
   right: 15%;
-  top: 120%;
+  top: 10%;
   color: rgb(190, 190, 190);
   cursor: pointer;
 }
