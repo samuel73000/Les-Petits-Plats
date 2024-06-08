@@ -112,13 +112,13 @@ body {
   border-radius: 0 0 11px 11px;
   transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
   opacity: 0;
-  transform: scaleY(0); /* Commencez complètement aplati */
-  transform-origin: top; /* Définissez l'origine de la transformation au haut */
+  transform: scaleY(0); 
+  transform-origin: top; 
   visibility: hidden;
 }
 .div-modal-select.visible {
   opacity: 1;
-  transform: scaleY(1); /* Étendez à la taille normale */
+  transform: scaleY(1); 
   visibility: visible;
   transition-delay: 0s;
 }
