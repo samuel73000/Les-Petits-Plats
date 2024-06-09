@@ -15,8 +15,7 @@ import{filtrageTagsInput} from "./js/filtrageTag.js"
 // Appel asynchrone à fetchData pour récupérer les données et les stocker dans globalData
 const globalData = await fetchData(); 
 
-// Initialisation d'un tableau pour les tags des ingrédients
-let tagsIngredients = []; 
+
 
 // Initialisation d'un tableau pour les tags des appareils
 let tagsAppareils = []; 
