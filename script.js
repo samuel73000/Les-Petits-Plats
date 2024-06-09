@@ -15,14 +15,6 @@ import{filtrageTagsInput} from "./js/filtrageTag.js"
 // Appel asynchrone à fetchData pour récupérer les données et les stocker dans globalData
 const globalData = await fetchData(); 
 
-
-
-// Initialisation d'un tableau pour les tags des appareils
-let tagsAppareils = []; 
-
-// Initialisation d'un tableau pour les tags des ustensiles
-let tagsUstensils = []; 
-
 // Définition de la fonction init qui initialise l'application
 async function init() {
   // Affichage des données initiales récupérées
@@ -31,6 +23,15 @@ async function init() {
   SelectFilterTag(globalData,dataTag => {
     filtrageTagsInput(dataTag);
 });
+
+// filtrageTagsInput(globalData ,back =>{
+// if(back.length !==0){
+//   SelectFilterTag(back)
+// }else{
+//   SelectFilterTag(globalData)
+// }
+// })
+
 
 
   // Appel à filtrageInput pour filtrer les données en fonction des entrées utilisateur

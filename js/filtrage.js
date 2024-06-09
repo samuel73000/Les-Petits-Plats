@@ -37,18 +37,3 @@ export function filtrageInput(globalData, callback) {
     callback(filteredData);
   });
 }
-
-
-
-
-
-
-// il que on fasse un .filtre sur la value de l'input puis que on recheche dans les card si on a une
-// correspondance avec les titre , ingédiants ou les discription . si on a un correspondance on push dans le tableau filteredData
-// on vas pouvoir faire un displayData(filteredData) pour affichier le nouveau .json.
-//  (les filtre doivent commencer a partir de 3 carracteres )
-
-// export function filtrageIngredient() {}
-// export function filtrageIngredient() {}
-// export function filtrageIngredient() {}
-// export function filtrageTags() {}
