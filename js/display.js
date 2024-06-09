@@ -56,9 +56,9 @@ export function displayData(globalData) {
 }
 
 // Fonction pour initialiser les filtres de tags
-export function SelectFilterTag(globalData) {
+export function SelectFilterTag(globalData , callback) {
   // Crée un Set pour stocker les ingrédients uniques
-  const ingredientsSet = new Set();
+   const ingredientsSet = new Set();
   // Itère sur chaque recette pour extraire les ingrédients
   globalData.forEach((element) => {
     element.ingredients.forEach((ingredient) => {
@@ -169,5 +169,9 @@ export function SelectFilterTag(globalData) {
       divModalSelect.classList.toggle("visible");
     });
   });
+
+  callback([ingredientsSet, ustensilesSet, applianceSet]);
+
+
 }
 

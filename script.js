@@ -7,9 +7,11 @@ import { displayData , SelectFilterTag} from "./js/display.js";
 // Importation de la fonction fetchData depuis le fichier api.js
 import { fetchData } from "./js/api.js"; 
 
-// Importation commentée de la fonction filtrageInput
+// Importation de la fonction filtrageInput
 import {filtrageInput} from "./js/filtrage.js"; 
 
+//// Importation de la fonction filtrageTaginput
+import{filtrageTagsInput} from "./js/filtrageTag.js"
 // Appel asynchrone à fetchData pour récupérer les données et les stocker dans globalData
 const globalData = await fetchData(); 
 
@@ -27,7 +29,11 @@ async function init() {
   // Affichage des données initiales récupérées
   displayData(globalData); 
   // Appel à SelectFilterTag pour afficher le select des tags des ingrédients
-  SelectFilterTag(globalData);
+  SelectFilterTag(globalData,dataTag => {
+    filtrageTagsInput(dataTag);
+});
+
+
   // Appel à filtrageInput pour filtrer les données en fonction des entrées utilisateur
   filtrageInput(globalData, filteredData => {
     // Vérification si des données filtrées existent

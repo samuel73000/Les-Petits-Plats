@@ -99,6 +99,7 @@ body {
   position: absolute;
   right: 10%;
   color: rgb(190, 190, 190);
+  cursor: pointer;
 }
 .div-modal-select {
   z-index: 1000;
