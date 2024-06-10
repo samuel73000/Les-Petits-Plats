@@ -1,14 +1,10 @@
-export function filtrageInput(globalData, callback) {
+export  function filtrageInput(globalData) {
   // Sélection des éléments du DOM pour l'input et le bouton
   const inputMain = document.querySelector(".input-header");
-  const boutonInputHeader = document.querySelector(".bouton-input-header");
 
-  // Ajout d'un écouteur d'événement sur le clic du bouton
-  boutonInputHeader.addEventListener("click", () => {
     // Récupération de la valeur de l'input
     const value = inputMain.value;
     let filteredData = []; // Déclaration d'un tableau pour stocker les données filtrées
-
     // Vérification que la valeur saisie contient au moins 3 caractères
     if (value.length >= 3) {
       // Filtrage des données par nom
@@ -30,10 +26,12 @@ export function filtrageInput(globalData, callback) {
 
       // Combinaison des résultats des trois filtres en éliminant les doublons
       filteredData = [...new Set([...filteredByName, ...filteredByDescription, ...filteredByIngredients])];
+      
     }
-    // Affichage des données filtrées dans la console
-    console.log(filteredData);
-    // Appel du callback avec les données filtrées pour traitement ultérieur
-    callback(filteredData);
-  });
+
+    return filteredData;
+
+
+    
 }
+

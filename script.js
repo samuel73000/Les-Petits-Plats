@@ -2,53 +2,47 @@
 // Il importe et utilise des fonctions depuis d'autres modules pour afficher et filtrer les données.
 
 // Importation de la fonction displayData depuis le fichier display.js
-import { displayData , SelectFilterTag} from "./js/display.js"; 
+import { displayData, SelectFilterTag } from "./js/display.js";
 
 // Importation de la fonction fetchData depuis le fichier api.js
-import { fetchData } from "./js/api.js"; 
+import { fetchData } from "./js/api.js";
 
 // Importation de la fonction filtrageInput
-import {filtrageInput} from "./js/filtrage.js"; 
+import { filtrageInput } from "./js/filtrage.js";
 
 //// Importation de la fonction filtrageTaginput
-import{filtrageTagsInput} from "./js/filtrageTag.js"
+import { filtrageTagsInput } from "./js/filtrageTag.js";
 // Appel asynchrone à fetchData pour récupérer les données et les stocker dans globalData
-const globalData = await fetchData(); 
+const globalData = await fetchData();
+
+// appel a filtrage.js pour recuperer le data filtrer du main input
+const boutonInputHeader = document.querySelector(".bouton-input-header");//on recupere l'input
+let filteredDataMainInput = filtrageInput(globalData);// on stock le return de la function
 
 // Définition de la fonction init qui initialise l'application
 async function init() {
-  // Affichage des données initiales récupérées
-  displayData(globalData); 
+  // Affichage des données initiales rcupérées
+  displayData(globalData);
   // Appel à SelectFilterTag pour afficher le select des tags des ingrédients
-  SelectFilterTag(globalData,dataTag => {
+  SelectFilterTag(globalData, (dataTag) => {
     filtrageTagsInput(dataTag);
-});
-
-// filtrageTagsInput(globalData ,back =>{
-// if(back.length !==0){
-//   SelectFilterTag(back)
-// }else{
-//   SelectFilterTag(globalData)
-// }
-// })
+  });
 
 
-
-  // Appel à filtrageInput pour filtrer les données en fonction des entrées utilisateur
-  filtrageInput(globalData, filteredData => {
-    // Vérification si des données filtrées existent
-    if (filteredData.length  !== 0) {
-      displayData(filteredData);  // Affiche les données filtrées si le tableau filteredData n'est pas vide
+  
+  // filtre du main input
+  boutonInputHeader.addEventListener("click", () => {// Ajoute un événement de clic à l'élément boutonInputHeader.
+    // Met à jour les données filtrées du main input en utilisant la fonction filtrageInput avec globalData
+    filteredDataMainInput = filtrageInput(globalData);
+    // Vérifie si aucune donnée n'a été filtrée
+    if (filteredDataMainInput.length === 0) { 
+      // Affiche les données initiales si aucune donnée n'a été filtrée
+      displayData(globalData);
     } else {
-      displayData(globalData);  // Réaffiche globalData si aucun résultat filtré
+      // Affiche les données filtrées si des données ont été filtrées
+      displayData(filteredDataMainInput);
     }
   });
 }
 
-// Exécution de la fonction init au chargement du script
-init(); 
-
-
-
-
-
+init();

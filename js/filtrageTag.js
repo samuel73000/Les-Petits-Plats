@@ -1,4 +1,4 @@
-export function filtrageTagsInput(tagData , callback) {
+export function filtrageTagsInput(tagData ,callback) {
 const inputSelect = document.querySelectorAll(".input-select");
 const inputSubit = document.querySelectorAll(".loupe-for-input");
 
@@ -12,7 +12,7 @@ inputSubit[0].addEventListener("click", () => {
     );
     IngredientsFiltrer.push(...filteredByIngredients);
 });
-callback(IngredientsFiltrer);
+// callback(IngredientsFiltrer);
 
 
 // Initialisation d'un tableau pour les tags des ustensiles
@@ -25,7 +25,7 @@ let ustensilesFiltrer = [];
 );
 ustensilesFiltrer.push(...filteredbyUstensiles);
    });
-callback(ustensilesFiltrer);
+// callback(ustensilesFiltrer);
 
 // Initialisation d'un tableau pour les tags des appliance
 let appliance = Array.from(tagData[2]);
@@ -37,5 +37,5 @@ inputSubit[2].addEventListener("click", ()=>{
     );
     applianceFiltrer.push(...filteredbyAppliance);
 })
-callback(applianceFiltrer);
+// callback(applianceFiltrer);
 }
