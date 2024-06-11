@@ -24,13 +24,8 @@ async function init() {
   // Affichage des données initiales rcupérées
   displayData(globalData);
   SelectFilterTag(globalData);
-  // Appel à SelectFilterTag pour afficher le select des tags des ingrédients
-  // SelectFilterTag(globalData, (dataTag) => {
-  //   filtrageTagsInput(dataTag);
-  // });
+ 
 
-
-  
   // filtre du main input
   boutonInputHeader.addEventListener("click", () => {// Ajoute un événement de clic à l'élément boutonInputHeader.
     // Met à jour les données filtrées du main input en utilisant la fonction filtrageInput avec globalData
@@ -39,10 +34,11 @@ async function init() {
     if (filteredDataMainInput.length === 0) { 
       // Affiche les données initiales si aucune donnée n'a été filtrée
       displayData(globalData);
+      SelectFilterTag(globalData);
     } else {
       // Affiche les données filtrées si des données ont été filtrées
-      displayData(filteredDataMainInput);
-      SelectFilterTag(filteredDataMainInput);
+      displayData(filteredDataMainInput);//  on mais a jour la data des cards de recette
+      SelectFilterTag(filteredDataMainInput);// on mais a jour la data des tags 
     }
   });
 }

@@ -1,4 +1,5 @@
 export function filtrageTagsInput(tagData ,callback) {
+    console.log(tagData)
 const inputSelect = document.querySelectorAll(".input-select");
 const inputSubit = document.querySelectorAll(".loupe-for-input");
 
