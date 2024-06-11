@@ -23,10 +23,11 @@ let filteredDataMainInput = filtrageInput(globalData);// on stock le return de l
 async function init() {
   // Affichage des données initiales rcupérées
   displayData(globalData);
+  SelectFilterTag(globalData);
   // Appel à SelectFilterTag pour afficher le select des tags des ingrédients
-  SelectFilterTag(globalData, (dataTag) => {
-    filtrageTagsInput(dataTag);
-  });
+  // SelectFilterTag(globalData, (dataTag) => {
+  //   filtrageTagsInput(dataTag);
+  // });
 
 
   
@@ -41,6 +42,7 @@ async function init() {
     } else {
       // Affiche les données filtrées si des données ont été filtrées
       displayData(filteredDataMainInput);
+      SelectFilterTag(filteredDataMainInput);
     }
   });
 }
