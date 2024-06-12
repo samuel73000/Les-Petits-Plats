@@ -24,7 +24,7 @@ async function init() {
   // Affichage des données initiales rcupérées
   displayData(globalData);
   SelectFilterTag(globalData);
- 
+  filtrageTagsInput(globalData);
 
   // filtre du main input
   boutonInputHeader.addEventListener("click", () => {// Ajoute un événement de clic à l'élément boutonInputHeader.
