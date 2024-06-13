@@ -1,15 +1,6 @@
 // Ce fichier contient des fonctions pour filtrer les données en fonction des tags à l'aide des inputs dans les select
 
 // Fonction de filtrage par ingrédients
-// export function filtreTagIngredient(data) {
-//     const inputSelect = document.querySelectorAll(".input-select");
-//     let filteredByIngredients = data.filter((recipe) =>
-//         recipe.ingredients.some((ingredient) =>
-//             ingredient.ingredient.toLowerCase().includes(inputSelect[0].value.toLowerCase())
-//         )
-//     );
-//     return filteredByIngredients;
-// }
 export function filtreTagIngredient(data) {
     const inputSelect = document.querySelectorAll(".input-select");
     const inputValues = Array.from(inputSelect).map(input => input.value.toLowerCase().trim()).filter(value => value !== "");
@@ -26,26 +17,34 @@ export function filtreTagIngredient(data) {
     return filteredIngredients;
 }
 
-
-
-
-
 // Fonction de filtrage par ustensiles
 export function filtreTagUstensiles(data) {
     const inputSelect = document.querySelectorAll(".input-select");
-    let filteredByUstensiles = data.filter((recipe) =>
-        recipe.ustensils.some((ustensil) =>
-            ustensil.toLowerCase().includes(inputSelect[1].value.toLowerCase())
-        )
-    );
-    return filteredByUstensiles;
+    const inputValues = Array.from(inputSelect).map(input => input.value.toLowerCase().trim()).filter(value => value !== "");
+    let filteredUstensils = [];
+    data.forEach(recipe => {
+        recipe.ustensils.forEach(ustensil => {
+            inputValues.forEach(inputValue => {
+                if (ustensil.toLowerCase().includes(inputValue) && !filteredUstensils.includes(ustensil)) {
+                    filteredUstensils.push(ustensil);
+                }
+            });
+        });
+    });
+    return filteredUstensils;
 }
 
 // Fonction de filtrage par appareil
 export function filtreTagAppliance(data) {
     const inputSelect = document.querySelectorAll(".input-select");
-    let filteredByAppliance = data.filter((recipe) =>
-        recipe.appliance.toLowerCase().includes(inputSelect[2].value.toLowerCase())
-    );
-    return filteredByAppliance;
+    const inputValues = Array.from(inputSelect).map(input => input.value.toLowerCase().trim()).filter(value => value !== "");
+    let filteredAppliances = [];
+    data.forEach(recipe => {
+        inputValues.forEach(inputValue => {
+            if (recipe.appliance.toLowerCase().includes(inputValue) && !filteredAppliances.includes(recipe.appliance)) {
+                filteredAppliances.push(recipe.appliance);
+            }
+        });
+    });
+    return filteredAppliances;
 }

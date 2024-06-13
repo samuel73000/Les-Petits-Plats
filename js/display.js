@@ -55,133 +55,97 @@ export function displayData(globalData) {
   });
 }
 
-// Fonction pour initialiser les filtres de tags
-export function SelectFilterTag( globalData , elementFiltrer ) {
 
-  // Crée un Set pour stocker les ingrédients uniques
-    let ingredientsSet = new Set();
-  // Itère sur chaque recette pour extraire les ingrédients
-  globalData.forEach((element) => {
-    element.ingredients.forEach((ingredient) => {
-      const normalizedIngredient = ingredient.ingredient.trim().toLowerCase(); // Normalise l'ingrédient
-      if (!ingredientsSet.has(normalizedIngredient)) {
-        ingredientsSet.add(normalizedIngredient); // Ajoute l'ingrédient normalisé au Set s'il n'est pas déjà présent
-      }
-    });
-  });
- 
-  // Crée un Set pour stocker les ustensiles uniques
- let ustensilesSet = new Set();
-  // Itère sur chaque recette pour extraire les ustensiles
-  globalData.forEach((element) => {
-    element.ustensils.forEach((ustensils) => {
-      const normalizedUstensils = ustensils.trim().toLowerCase(); // Normalise l'ustensil
-      if (!ustensilesSet.has(normalizedUstensils)) {
-        ustensilesSet.add(normalizedUstensils); // Ajoute l'ustensil normalisé au Set s'il n'est pas déjà présent
-      }
-    });
-  });
-  // Crée un Set pour stocker les appareils uniques
-  let applianceSet = new Set();
-  // Itère sur chaque recette pour extraire les appareils
-  globalData.forEach((element) => {
-    const appliance = element.appliance;
-    if (typeof appliance === "string") {
-      const normalizedAppliance = appliance.trim().toLowerCase(); // Normalise l'appareil
-      if (!applianceSet.has(normalizedAppliance)) {
-        applianceSet.add(normalizedAppliance); // Ajoute l'appareil normalisé au Set s'il n'est pas déjà présent
-      }
-    }
-  });
-
-  // Sélectionne tous les conteneurs de filtres
+// Cette fonction createFilterElements prend en paramètres globalData (les données globales des recettes), elementFiltrer (les éléments à filtrer), index (l'index du type de filtre), et type (le type de filtre : "ingredient", "ustensil", ou "appliance").
+function createFilterElements(globalData, elementFiltrer, index, type) {
   const containerFiltreTagAll = document.querySelectorAll(".container-filtre");
-  const textes = ["Ingrédient", "Ustensile", "Appareil"]; // Textes pour chaque type de filtre
+  const textes = ["Ingrédient", "Ustensile", "Appareil"]; // Tableau des textes pour chaque type de filtre
+
   // Itère sur chaque conteneur de filtre
-  containerFiltreTagAll.forEach((container, index) => {
-    container.textContent = textes[index % textes.length]; // Définit le texte du filtre
-    const SelectFleche = document.createElement("i"); // Crée une icône pour les flèches
-    SelectFleche.classList.add("fa-solid", "fa-chevron-down", "flecheSelect"); // Ajoute des classes pour le style
-    container.appendChild(SelectFleche); // Ajoute la flèche dans le conteneur
+  containerFiltreTagAll.forEach((container, idx) => {
+    // Vérifie si l'index correspond à l'index du type de filtre
+    if (idx !== index) return;
 
-    // Crée un div pour la modal de sélection
+    // Définit le texte du filtre en fonction du type
+    container.textContent = textes[idx % textes.length];
+
+    // Crée une icône de flèche pour le filtre
+    const SelectFleche = document.createElement("i");
+    SelectFleche.classList.add("fa-solid", "fa-chevron-down", "flecheSelect");
+    container.appendChild(SelectFleche);
+
+    // Crée un div pour le sélecteur
     const divModalSelect = document.createElement("div");
-    divModalSelect.classList.add("div-modal-select"); // Ajoute des classes pour le style
-    container.appendChild(divModalSelect); // Ajoute le div dans le conteneur
+    divModalSelect.classList.add("div-modal-select");
+    container.appendChild(divModalSelect);
 
-    const inputSelect = document.createElement("input"); // Crée un input pour la recherche
-    inputSelect.classList.add("input-select"); // Ajoute des classes pour le style
-    divModalSelect.appendChild(inputSelect); // Ajoute l'input dans le div
+    // Crée un input pour la recherche
+    const inputSelect = document.createElement("input");
+    inputSelect.classList.add("input-select");
+    divModalSelect.appendChild(inputSelect);
 
-    const LoupeForInput = document.createElement("i"); // Crée une icône de loupe
-    LoupeForInput.classList.add(
-      "fa-solid",
-      "fa-magnifying-glass",
-      "loupe-for-input"
-    ); // Ajoute des classes pour le style
-    divModalSelect.appendChild(LoupeForInput); // Ajoute la loupe dans le div
+    // Crée une icône loupe pour la recherche
+    const LoupeForInput = document.createElement("i");
+    LoupeForInput.classList.add("fa-solid", "fa-magnifying-glass", "loupe-for-input");
+    divModalSelect.appendChild(LoupeForInput);
 
-    // Crée des divs pour les ingrédients, ustensiles, et appareils en fonction de l'index
-    
-    if (index === 0) {
-      const divModalSelectIgrediants = document.createElement("div");
-      divModalSelectIgrediants.classList.add("div-modal-select-ingrediants");
-      divModalSelect.appendChild(divModalSelectIgrediants);
-  
-      // Vérifie si nouvelleVariableIngredients n'est pas vide, sinon utilise ingredientsSet
-      const ingredientsToUse =  elementFiltrer &&  elementFiltrer.length > 0 ?  elementFiltrer : ingredientsSet;
-  
-      ingredientsToUse.forEach((ingredient) => {
-          const pSelectTag = document.createElement("p");
-          pSelectTag.classList.add("p-select-tag");
-          pSelectTag.textContent = ingredient;
-          divModalSelectIgrediants.appendChild(pSelectTag);
+    // Crée un Set pour stocker les éléments uniques
+    let elementSet = new Set();
+
+    // Itère sur chaque recette pour extraire les éléments selon le type
+    globalData.forEach((element) => {
+      let elementsArray = [];
+      if (type === "ingredient") {
+        elementsArray = element.ingredients.map(ing => ing.ingredient.trim().toLowerCase());
+      } else if (type === "ustensil") {
+        elementsArray = element.ustensils.map(ust => ust.trim().toLowerCase());
+      } else if (type === "appliance") {
+        elementsArray = [element.appliance.trim().toLowerCase()];
+      }
+      // Ajoute les éléments uniques à l'ensemble
+      elementsArray.forEach((item) => {
+        if (!elementSet.has(item)) {
+          elementSet.add(item);
+        }
       });
-  }
+    });
 
+    // Crée un div pour afficher les éléments filtrés
+    const divModalSelectElement = document.createElement("div");
+    divModalSelectElement.classList.add(`div-modal-select-${type}`);
+    divModalSelect.appendChild(divModalSelectElement);
 
+    // Détermine les éléments à utiliser pour le filtre
+    const elementsToUse = elementFiltrer && elementFiltrer.length > 0 ? elementFiltrer : Array.from(elementSet);
 
+    // Affiche chaque élément dans le div de sélection
+    elementsToUse.forEach((item) => {
+      const pSelectTag = document.createElement("p");
+      pSelectTag.classList.add("p-select-tag");
+      pSelectTag.textContent = item;
+      divModalSelectElement.appendChild(pSelectTag);
+    });
 
-
-    // Vérifie si c'est le deuxième élément et crée la div pour les ustensiles
-    if (index === 1) {
-      const divModalSelectUstensiles = document.createElement("div"); // Crée un div pour les ustensiles
-      divModalSelectUstensiles.classList.add("div-modal-select-ustensiles"); // Ajoute des classes pour le style
-      divModalSelect.appendChild(divModalSelectUstensiles); // Ajoute le div dans le divModalSelect
-
-      ustensilesSet.forEach((ustensils) => {
-        // Utilisation de forEach pour parcourir le Set et ajouter les ustensiles dans la div
-        const pSelectTag = document.createElement("p"); // Crée un élément "p"
-        pSelectTag.classList.add("p-select-tag"); // Ajoute des classes pour le style
-        pSelectTag.textContent = ustensils; // Définit le texte de l'élément "p"
-        divModalSelectUstensiles.appendChild(pSelectTag); // Ajoute l'élément "p" dans le div
-      });
-    }
-    // Vérifie si c'est le troisième élément et crée la div pour les appareils
-    if (index === 2) {
-      const divModalSelectAppliance = document.createElement("div"); // Crée un div pour les appareils
-      divModalSelectAppliance.classList.add("div-modal-select-appliance"); // Ajoute des classes pour le style
-      divModalSelect.appendChild(divModalSelectAppliance); // Ajoute le div dans le divModalSelect
-
-      applianceSet.forEach((appliance) => {
-        // Utilisation de forEach pour parcourir le Set et ajouter les appareils dans la div
-        const pSelectTag = document.createElement("p"); // Crée un élément "p"
-        pSelectTag.classList.add("p-select-tag"); // Ajoute des classes pour le style
-        pSelectTag.textContent = appliance; // Définit le texte de l'élément "p"
-        divModalSelectAppliance.appendChild(pSelectTag); // Ajoute l'élément "p" dans le div
-      });
-    }
-
-    // Ajoute l'écouteur d'événements à chaque container individuellement
+    // Ajoute un événement de clic pour afficher ou masquer les éléments filtrés
     SelectFleche.addEventListener("click", () => {
       SelectFleche.classList.toggle("fa-chevron-down");
       SelectFleche.classList.toggle("fa-chevron-up");
       divModalSelect.classList.toggle("visible");
     });
   });
-
-  return([ingredientsSet, ustensilesSet, applianceSet]);
-
-
 }
 
+// Fonction de filtrage par ingrédients
+export function SelectFilterTagIngredients(globalData, elementFiltrer) {
+  createFilterElements(globalData, elementFiltrer, 0, "ingredient");
+}
+
+// Fonction de filtrage par ustensiles
+export function SelectFilterTagUstensiles(globalData, elementFiltrer) {
+  createFilterElements(globalData, elementFiltrer, 1, "ustensil");
+}
+
+// Fonction de filtrage par appareils
+export function SelectFilterTagAppliance(globalData, elementFiltrer) {
+  createFilterElements(globalData, elementFiltrer, 2, "appliance");
+}

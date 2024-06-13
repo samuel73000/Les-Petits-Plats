@@ -2,7 +2,7 @@
 // Il importe et utilise des fonctions depuis d'autres modules pour afficher et filtrer les données.
 
 // Importation de la fonction displayData depuis le fichier display.js
-import { displayData, SelectFilterTag } from "./js/display.js";
+import { displayData, SelectFilterTagIngredients} from "./js/display.js";
 
 // Importation de la fonction fetchData depuis le fichier api.js
 import { fetchData } from "./js/api.js";
@@ -18,9 +18,8 @@ import { filtreTagIngredient } from "./js/filtrageTag.js";
 // Appel asynchrone à fetchData pour récupérer les données et les stocker dans globalData
 const globalData = await fetchData();
 
-// appel a filtrage.js pour recuperer le data filtrer du main input
-const boutonInputHeader = document.querySelector(".bouton-input-header");//on recupere l'input
-// let filteredDataMainInput = filtrageInput(globalData);// on stock le return de la function filtrageInput
+
+const boutonInputHeader = document.querySelector(".bouton-input-header");// on recupere le btn pour submit les filtres 
 
 
 let filteredDataMainInput = []; // Initialize globally
@@ -29,7 +28,7 @@ let filteredDataInputTags = []; // Initialize globally
 function init() {
   // Display initial data
   displayData(globalData);
-  SelectFilterTag(globalData);
+  SelectFilterTagIngredients(globalData);
 
   // Event listener for main input button
   boutonInputHeader.addEventListener("click", () => {
@@ -39,14 +38,14 @@ function init() {
     if (filteredDataMainInput.length === 0) { 
       // Display initial data if no data was filtered
       displayData(globalData);
-      SelectFilterTag(globalData);
+      SelectFilterTagIngredients(globalData);
     } else {
       // Display filtered data if data was filtered
       displayData(filteredDataMainInput); // Update recipe cards
-      SelectFilterTag(filteredDataMainInput); // Update tags
+      SelectFilterTagIngredients(filteredDataMainInput); // Update tags
     }
 
-    // Inside this event listener, we add another event listener for the tag input
+    // on ajoue un addevntlistner pour les tags a l'interieur du addeventlisetner du main input 
     const inputSubit = document.querySelectorAll(".loupe-for-input");
     inputSubit[0].addEventListener("click", () => {
       // Filter tags based on the current main input filtered data
@@ -55,13 +54,50 @@ function init() {
 
       if (filteredDataInputTags.length === 0) {
         // If no tags were filtered, use the current main input filtered data
-        SelectFilterTag(dataToFilter);
+        SelectFilterTagIngredients(dataToFilter);
       } else {
         // Display filtered tags
-        SelectFilterTag(dataToFilter, filteredDataInputTags);
+        SelectFilterTagIngredients(dataToFilter, filteredDataInputTags);
       }
     });
   });
+
+
+
+
+  const inputSubit = document.querySelectorAll(".loupe-for-input");
+  inputSubit[0].addEventListener("click", () => {
+    // Filter tags based on the current main input filtered data
+    const dataToFilter = filteredDataMainInput.length === 0 ? globalData : filteredDataMainInput;
+    filteredDataInputTags = filtreTagIngredient(dataToFilter);
+
+    if (filteredDataInputTags.length === 0) {
+      // If no tags were filtered, use the current main input filtered data
+      SelectFilterTagIngredients(dataToFilter);
+    } else {
+      // Display filtered tags
+      SelectFilterTagIngredients(dataToFilter, filteredDataInputTags);
+    }
+  });
+  // inputSubit[1].addEventListener("click", () => {
+  //   // Filter tags based on the current main input filtered data
+  //   const dataToFilter = filteredDataMainInput.length === 0 ? globalData : filteredDataMainInput;
+  //   filteredDataInputTags = filtreTagIngredient(dataToFilter);
+
+  //   if (filteredDataInputTags.length === 0) {
+  //     // If no tags were filtered, use the current main input filtered data
+  //     SelectFilterTagIngredients(dataToFilter);
+  //   } else {
+  //     // Display filtered tags
+  //     SelectFilterTagIngredients(dataToFilter, filteredDataInputTags);
+  //   }
+  // });
+
+
+
+
+
+
 }
 
 init();

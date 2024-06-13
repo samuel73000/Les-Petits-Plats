@@ -135,7 +135,13 @@ body {
   color: rgb(190, 190, 190);
   cursor: pointer;
 }
-.div-modal-select-ingrediants,
+.div-modal-select-ingredient{
+  overflow-y: auto;
+  height: 200px;
+  scrollbar-width: none; /* pour Firefox */
+  -ms-overflow-style: none; /* pour Internet Explorer et Edge */
+}
+
 .div-modal-select-ustensiles,
 .div-modal-select-appliance {
   overflow-y: auto;
