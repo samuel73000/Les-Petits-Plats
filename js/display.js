@@ -56,9 +56,10 @@ export function displayData(globalData) {
 }
 
 // Fonction pour initialiser les filtres de tags
-export function SelectFilterTag(globalData ) {
+export function SelectFilterTag( globalData , elementFiltrer ) {
+
   // Crée un Set pour stocker les ingrédients uniques
-   const ingredientsSet = new Set();
+    let ingredientsSet = new Set();
   // Itère sur chaque recette pour extraire les ingrédients
   globalData.forEach((element) => {
     element.ingredients.forEach((ingredient) => {
@@ -68,8 +69,9 @@ export function SelectFilterTag(globalData ) {
       }
     });
   });
+ 
   // Crée un Set pour stocker les ustensiles uniques
-  const ustensilesSet = new Set();
+ let ustensilesSet = new Set();
   // Itère sur chaque recette pour extraire les ustensiles
   globalData.forEach((element) => {
     element.ustensils.forEach((ustensils) => {
@@ -80,7 +82,7 @@ export function SelectFilterTag(globalData ) {
     });
   });
   // Crée un Set pour stocker les appareils uniques
-  const applianceSet = new Set();
+  let applianceSet = new Set();
   // Itère sur chaque recette pour extraire les appareils
   globalData.forEach((element) => {
     const appliance = element.appliance;
@@ -120,19 +122,27 @@ export function SelectFilterTag(globalData ) {
     divModalSelect.appendChild(LoupeForInput); // Ajoute la loupe dans le div
 
     // Crée des divs pour les ingrédients, ustensiles, et appareils en fonction de l'index
+    
     if (index === 0) {
-      const divModalSelectIgrediants = document.createElement("div"); // Crée un div pour les ingrédients
-      divModalSelectIgrediants.classList.add("div-modal-select-ingrediants"); // Ajoute des classes pour le style
-      divModalSelect.appendChild(divModalSelectIgrediants); // Ajoute le div dans le divModalSelect
-
-      ingredientsSet.forEach((ingredient) => {
-        // Utilisation de forEach pour parcourir le Set et ajouter les ingrédients dans la div
-        const pSelectTag = document.createElement("p"); // Crée un élément "p"
-        pSelectTag.classList.add("p-select-tag"); // Ajoute des classes pour le style
-        pSelectTag.textContent = ingredient; // Définit le texte de l'élément "p"
-        divModalSelectIgrediants.appendChild(pSelectTag); // Ajoute l'élément "p" dans le div
+      const divModalSelectIgrediants = document.createElement("div");
+      divModalSelectIgrediants.classList.add("div-modal-select-ingrediants");
+      divModalSelect.appendChild(divModalSelectIgrediants);
+  
+      // Vérifie si nouvelleVariableIngredients n'est pas vide, sinon utilise ingredientsSet
+      const ingredientsToUse =  elementFiltrer &&  elementFiltrer.length > 0 ?  elementFiltrer : ingredientsSet;
+  
+      ingredientsToUse.forEach((ingredient) => {
+          const pSelectTag = document.createElement("p");
+          pSelectTag.classList.add("p-select-tag");
+          pSelectTag.textContent = ingredient;
+          divModalSelectIgrediants.appendChild(pSelectTag);
       });
-    }
+  }
+
+
+
+
+
     // Vérifie si c'est le deuxième élément et crée la div pour les ustensiles
     if (index === 1) {
       const divModalSelectUstensiles = document.createElement("div"); // Crée un div pour les ustensiles

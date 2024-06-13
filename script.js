@@ -20,56 +20,49 @@ const globalData = await fetchData();
 
 // appel a filtrage.js pour recuperer le data filtrer du main input
 const boutonInputHeader = document.querySelector(".bouton-input-header");//on recupere l'input
-let filteredDataMainInput = filtrageInput(globalData);// on stock le return de la function filtrageInput
+// let filteredDataMainInput = filtrageInput(globalData);// on stock le return de la function filtrageInput
 
 
+let filteredDataMainInput = []; // Initialize globally
+let filteredDataInputTags = []; // Initialize globally
 
-
-// Définition de la fonction init qui initialise l'application
 function init() {
-  // Affichage des données initiales recupérées
+  // Display initial data
   displayData(globalData);
   SelectFilterTag(globalData);
- 
+
+  // Event listener for main input button
   boutonInputHeader.addEventListener("click", () => {
-    // Met à jour les données filtrées du main input en utilisant la fonction filtrageInput avec globalData
+    // Update the filtered data from main input
     filteredDataMainInput = filtrageInput(globalData);
-     
 
-
-     // Vérifie si aucune donnée n'a été filtrée
-     if (filteredDataMainInput.length === 0) { 
-      // Affiche les données initiales si aucune donnée n'a été filtrée
+    if (filteredDataMainInput.length === 0) { 
+      // Display initial data if no data was filtered
       displayData(globalData);
       SelectFilterTag(globalData);
-
     } else {
-      // Affiche les données filtrées si des données ont été filtrées
-      displayData(filteredDataMainInput);//  on mais a jour la data des cards de recette
-      SelectFilterTag(filteredDataMainInput);// on mais a jour la data des tags 
+      // Display filtered data if data was filtered
+      displayData(filteredDataMainInput); // Update recipe cards
+      SelectFilterTag(filteredDataMainInput); // Update tags
     }
-   
-});
 
+    // Inside this event listener, we add another event listener for the tag input
+    const inputSubit = document.querySelectorAll(".loupe-for-input");
+    inputSubit[0].addEventListener("click", () => {
+      // Filter tags based on the current main input filtered data
+      const dataToFilter = filteredDataMainInput.length === 0 ? globalData : filteredDataMainInput;
+      filteredDataInputTags = filtreTagIngredient(dataToFilter);
 
-// filtre input des tags
-const inputSubit = document.querySelectorAll(".loupe-for-input");
-inputSubit[0].addEventListener("click", () => {
-  let filteredDataInputTags = filtreTagIngredient(globalData);
-    if (filteredDataMainInput.length === 0) {
-        filtreTagIngredient(globalData);
-        SelectFilterTag(filteredDataInputTags)
-        console.log(filteredDataInputTags);
-        console.log(filteredDataMainInput)
-    } else {
-        filtreTagIngredient(filteredDataMainInput);
-        SelectFilterTag(filteredDataInputTags)
-        console.log(filteredDataInputTags);
-    }
-});
-
-
-
+      if (filteredDataInputTags.length === 0) {
+        // If no tags were filtered, use the current main input filtered data
+        SelectFilterTag(dataToFilter);
+      } else {
+        // Display filtered tags
+        SelectFilterTag(dataToFilter, filteredDataInputTags);
+      }
+    });
+  });
 }
 
 init();
+
