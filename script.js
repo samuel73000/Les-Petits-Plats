@@ -32,81 +32,68 @@ function init() {
   SelectFilterTagUstensiles(globalData);
   SelectFilterTagAppliance(globalData);
   // Event listener for main input button
-  boutonInputHeader.addEventListener("click", () => {
-    // Update the filtered data from main input
-    filteredDataMainInput = filtrageInput(globalData);
-
-    if (filteredDataMainInput.length === 0) { 
+    // Event listener for main input button
+    boutonInputHeader.addEventListener("click", () => {
+      // Update the filtered data from main input
+      filteredDataMainInput = filtrageInput(globalData);
+    
+      if (filteredDataMainInput.length === 0) { 
       // Display initial data if no data was filtered
       displayData(globalData);
       SelectFilterTagIngredients(globalData);
-    } else {
+      SelectFilterTagUstensiles(globalData);
+      SelectFilterTagAppliance(globalData);
+      } else {
       // Display filtered data if data was filtered
       displayData(filteredDataMainInput); // Update recipe cards
       SelectFilterTagIngredients(filteredDataMainInput); // Update tags
-    }
-
-    // on ajoue un addevntlistner pour les tags a l'interieur du addeventlisetner du main input 
-    const inputSubit = document.querySelectorAll(".loupe-for-input");
-    inputSubit[0].addEventListener("click", () => {
-      // Filter tags based on the current main input filtered data
-      const dataToFilter = filteredDataMainInput.length === 0 ? globalData : filteredDataMainInput;
-      filteredDataInputTags = filtreTagIngredient(dataToFilter);
-
-      if (filteredDataInputTags.length === 0) {
-        // If no tags were filtered, use the current main input filtered data
-        SelectFilterTagIngredients(dataToFilter);
-      } else {
-        // Display filtered tags
-        SelectFilterTagIngredients(dataToFilter, filteredDataInputTags);
+      SelectFilterTagUstensiles(filteredDataMainInput);
+      SelectFilterTagAppliance(filteredDataMainInput);
       }
+    
+      // Add event listeners for the tags inside the main input event listener
+      const inputSubit = document.querySelectorAll(".loupe-for-input");
+      inputSubit.forEach((input, index) => {
+      input.addEventListener("click", () => {
+        // Filter tags based on the current main input filtered data
+        const dataToFilter = filteredDataMainInput.length === 0 ? globalData : filteredDataMainInput;
+        filteredDataInputTags = tagFilters[index].filterFunction(dataToFilter);
+    
+        if (filteredDataInputTags.length === 0) {
+        // If no tags were filtered, use the current main input filtered data
+        tagFilters[index].selectFunction(dataToFilter);
+        } else {
+        // Display filtered tags
+        tagFilters[index].selectFunction(dataToFilter, filteredDataInputTags);
+        }
+      });
+      });
     });
-  });
 
 
 
+    const inputSubit = document.querySelectorAll(".loupe-for-input"); // on recupere les loupes pour subit les tags
+    const tagFilters = [
+      { filterFunction: filtreTagIngredient, selectFunction: SelectFilterTagIngredients },
+      { filterFunction: filtreTagUstensiles, selectFunction: SelectFilterTagUstensiles },
+      { filterFunction: filtreTagAppliance, selectFunction: SelectFilterTagAppliance }
+    ];
 
-  const inputSubit = document.querySelectorAll(".loupe-for-input"); // on recupere les loupes pour subit les tags
-  inputSubit[0].addEventListener("click", () => {
-    // Filter tags based on the current main input filtered data
-    const dataToFilter = filteredDataMainInput.length === 0 ? globalData : filteredDataMainInput;
-    filteredDataInputTags = filtreTagIngredient(dataToFilter);
+    inputSubit.forEach((input, index) => {
+      input.addEventListener("click", () => {
+        // Filter tags based on the current main input filtered data
+        const dataToFilter = filteredDataMainInput.length === 0 ? globalData : filteredDataMainInput;
+        filteredDataInputTags = tagFilters[index].filterFunction(dataToFilter);
 
-    if (filteredDataInputTags.length === 0) {
-      // If no tags were filtered, use the current main input filtered data
-      SelectFilterTagIngredients(dataToFilter);
-    } else {
-      // Display filtered tags
-      SelectFilterTagIngredients(dataToFilter, filteredDataInputTags);
-    }
-  });
-  inputSubit[1].addEventListener("click", () => {
-    // Filter tags based on the current main input filtered data
-    const dataToFilter = filteredDataMainInput.length === 0 ? globalData : filteredDataMainInput;
-    filteredDataInputTags = filtreTagUstensiles(dataToFilter);
-
-    if (filteredDataInputTags.length === 0) {
-      // If no tags were filtered, use the current main input filtered data
-      SelectFilterTagUstensiles(dataToFilter);
-    } else {
-      // Display filtered tags
-      SelectFilterTagUstensiles(dataToFilter, filteredDataInputTags);
-    }
-  });
-
-  inputSubit[2].addEventListener("click", () => {
-    // Filter tags based on the current main input filtered data
-    const dataToFilter = filteredDataMainInput.length === 0 ? globalData : filteredDataMainInput;
-    filteredDataInputTags = filtreTagAppliance(dataToFilter);
-
-    if (filteredDataInputTags.length === 0) {
-      // If no tags were filtered, use the current main input filtered data
-      SelectFilterTagAppliance(dataToFilter);
-    } else {
-      // Display filtered tags
-      SelectFilterTagAppliance(dataToFilter, filteredDataInputTags);
-    }
-  });
+        if (filteredDataInputTags.length === 0) {
+          // If no tags were filtered, use the current main input filtered data
+          tagFilters[index].selectFunction(dataToFilter);
+        } else {
+          // Display filtered tags
+          tagFilters[index].selectFunction(dataToFilter, filteredDataInputTags);
+        }
+      });
+    });
 
 
 
