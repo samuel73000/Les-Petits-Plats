@@ -1,4 +1,5 @@
-// Ce fichier contient des fonctions pour filtrer les données en fonction des tags à l'aide des inputs dans les select
+///////////////////////Filtre des Tags grace a leur input ////////////////////
+
 
 // Fonction de filtrage par ingrédients
 export function filtreTagIngredient(data) {
@@ -48,3 +49,70 @@ export function filtreTagAppliance(data) {
     });
     return filteredAppliances;
 }
+
+//////////////////// filtrer les recettes grace a tags////////////////////////////////////
+
+// Fonction de filtrage par ingrédients
+export function filtreTagReacetteIngredient(data) {
+    const containerTag = document.querySelectorAll(".div-modal-select-ingredient .p-select-tag");
+    containerTag.forEach(tag => {
+        tag.addEventListener("click", () => {
+            const searchText = tag.textContent.trim().toLowerCase(); // Assurez-vous que le texte est en minuscules
+            let filteredData = data.filter(recipe => {
+                // Vérifiez si recipe.ingredients est défini et est un tableau
+                if (recipe.ingredients && Array.isArray(recipe.ingredients)) {
+                    // Vérifiez si searchText est inclus dans les noms d'ingrédients
+                    return recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(searchText));
+                }
+                return false;
+            });
+            console.log(filteredData);
+        });
+    });
+}
+
+
+
+
+
+// Fonction de filtrage par Ustensiles
+export function filtreTagReacetteUstensiles(data) {
+    const containerTag = document.querySelectorAll(".div-modal-select-ustensil .p-select-tag");
+    containerTag.forEach(tag => {
+        tag.addEventListener("click", () => {
+            const searchText = tag.textContent.trim().toLowerCase(); // Assurez-vous que le texte est en minuscules
+            let filteredData = data.filter(recipe => {
+                // Vérifiez si recipe.ingredients est défini et est un tableau
+                if (recipe.ustensils && Array.isArray(recipe.ustensils)) {
+                    // Vérifiez si searchText est inclus dans les noms d'ingrédients
+                    return recipe.ustensils.some(ustensils => ustensils.toLowerCase().includes(searchText));
+                }
+                return false;
+            });
+            console.log(filteredData);
+        });
+     });
+    
+    }
+    
+
+    // Fonction de filtrage par appareil
+// Fonction de filtrage par appareil
+export function filtreTagReacetteAppliance(data) {
+    const containerTag = document.querySelectorAll(".div-modal-select-appliance .p-select-tag");
+    containerTag.forEach(tag => {
+        tag.addEventListener("click", () => {
+            const searchText = tag.textContent.trim().toLowerCase(); // Assurez-vous que le texte est en minuscules
+            let filteredData = data.filter(recipe => {
+                // Vérifiez si recipe.appliance est défini et est une chaîne de caractères
+                if (recipe.appliance && typeof recipe.appliance === "string") {
+                    // Vérifiez si searchText est inclus dans le nom de l'appareil
+                    return recipe.appliance.toLowerCase().includes(searchText);
+                }
+                return false;
+            });
+            console.log(filteredData);
+        });
+    });
+}
+    

@@ -11,7 +11,9 @@ import { fetchData } from "./js/api.js";
 import { filtrageInput } from "./js/filtrage.js";
 
 // Importation de la fonction filtrageTaginput
-import { filtreTagIngredient ,filtreTagUstensiles ,filtreTagAppliance } from "./js/filtrageTag.js";
+import { filtreTagIngredient ,filtreTagUstensiles ,
+  filtreTagAppliance , filtreTagReacetteIngredient ,filtreTagReacetteUstensiles 
+  ,filtreTagReacetteAppliance} from "./js/filtrageTag.js";
 
 
 
@@ -112,6 +114,14 @@ function init() {
     // Ajouter l'écouteur d'événements avec la fonction définie
     document.addEventListener('click', handleLoupeForInputClick);
     
+
+
+
+
+
+    filtreTagReacetteIngredient(globalData);
+    filtreTagReacetteUstensiles(globalData);
+    filtreTagReacetteAppliance(globalData);
 }
 
 init();
