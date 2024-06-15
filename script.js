@@ -72,34 +72,46 @@ function init() {
 
 
 
-    const inputSubit = document.querySelectorAll(".loupe-for-input"); // on recupere les loupes pour subit les tags
     const tagFilters = [
       { filterFunction: filtreTagIngredient, selectFunction: SelectFilterTagIngredients },
       { filterFunction: filtreTagUstensiles, selectFunction: SelectFilterTagUstensiles },
       { filterFunction: filtreTagAppliance, selectFunction: SelectFilterTagAppliance }
     ];
 
-    inputSubit.forEach((input, index) => {
-      input.addEventListener("click", () => {
-        // Filter tags based on the current main input filtered data
-        const dataToFilter = filteredDataMainInput.length === 0 ? globalData : filteredDataMainInput;
-        filteredDataInputTags = tagFilters[index].filterFunction(dataToFilter);
-
-        if (filteredDataInputTags.length === 0) {
-          // If no tags were filtered, use the current main input filtered data
-          tagFilters[index].selectFunction(dataToFilter);
+    function handleLoupeForInputClick(event) {
+      // Vérifie si l'élément cliqué est un loupe-for-input dans votre modal
+      if (event.target.classList.contains('loupe-for-input')) {
+        event.preventDefault(); // Empêche le comportement par défaut du clic
+        
+        console.log("click");
+        const inputSelect = document.querySelectorAll(".input-select");
+        const inputValues = Array.from(inputSelect).map(input => input.value.toLowerCase().trim()).filter(value => value !== "");
+    
+        // Trouver l'index de l'élément cliqué parmi tous les loupe-for-input
+        const index = Array.from(document.querySelectorAll('.loupe-for-input')).indexOf(event.target);
+    
+        // Vérifie si l'index est valide
+        if (index !== -1 && index < tagFilters.length) {
+          // Filter tags based on the current main input filtered data or global data if no filter applied
+          const dataToFilter = inputValues.length === 0 ? (filteredDataMainInput.length === 0 ? globalData : filteredDataMainInput) : globalData;
+          filteredDataInputTags = tagFilters[index].filterFunction(dataToFilter);
+    
+          if (filteredDataInputTags.length === 0) {
+            // If no tags were filtered, use the current main input filtered data or global data
+            tagFilters[index].selectFunction(dataToFilter);
+          } else {
+            // Display filtered tags
+            tagFilters[index].selectFunction(dataToFilter, filteredDataInputTags);
+          }
         } else {
-          // Display filtered tags
-          tagFilters[index].selectFunction(dataToFilter, filteredDataInputTags);
+          console.error(`Invalid index ${index}.`);
         }
-      });
-    });
-
-
-
-
-
-
+      }
+    }
+    
+    // Ajouter l'écouteur d'événements avec la fonction définie
+    document.addEventListener('click', handleLoupeForInputClick);
+    
 }
 
 init();

@@ -8,7 +8,7 @@ export function filtreTagIngredient(data) {
     data.forEach(recipe => {
         recipe.ingredients.forEach(ingredient => {
             inputValues.forEach(inputValue => {
-                if (ingredient.ingredient.toLowerCase().includes(inputValue) && !filteredIngredients.includes(ingredient.ingredient)) {
+                if (ingredient.ingredient.toLowerCase().includes(inputValue) && !filteredIngredients.includes(ingredient.ingredient) && !filteredIngredients.includes(ingredient.ingredient.toLowerCase())) {
                     filteredIngredients.push(ingredient.ingredient);
                 }
             });
