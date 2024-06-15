@@ -29,7 +29,9 @@ export function displayData(globalData) {
         const unit = element.ingredients[i].unit || ""; // Utilise une chaîne vide si unit est undefined
         ingredientsHTML += `
                   <div>
-                    <h3 class="titre-ingredients">${element.ingredients[i].ingredient}</h3>
+                    <h3 class="titre-ingredients">${
+                      element.ingredients[i].ingredient
+                    }</h3>
                     <p class="ingredients">${quantity + " " + unit}</p>
                   </div>
                   `;
@@ -54,7 +56,6 @@ export function displayData(globalData) {
     containerRecetteAll.appendChild(NewArticleRecette);
   });
 }
-
 
 // Cette fonction createFilterElements prend en paramètres globalData (les données globales des recettes), elementFiltrer (les éléments à filtrer), index (l'index du type de filtre), et type (le type de filtre : "ingredient", "ustensil", ou "appliance").
 function createFilterElements(globalData, elementFiltrer, index, type) {
@@ -86,7 +87,11 @@ function createFilterElements(globalData, elementFiltrer, index, type) {
 
     // Crée une icône loupe pour la recherche
     const LoupeForInput = document.createElement("i");
-    LoupeForInput.classList.add("fa-solid", "fa-magnifying-glass", "loupe-for-input");
+    LoupeForInput.classList.add(
+      "fa-solid",
+      "fa-magnifying-glass",
+      "loupe-for-input"
+    );
     divModalSelect.appendChild(LoupeForInput);
 
     // Crée un Set pour stocker les éléments uniques
@@ -96,9 +101,13 @@ function createFilterElements(globalData, elementFiltrer, index, type) {
     globalData.forEach((element) => {
       let elementsArray = [];
       if (type === "ingredient") {
-        elementsArray = element.ingredients.map(ing => ing.ingredient.trim().toLowerCase());
+        elementsArray = element.ingredients.map((ing) =>
+          ing.ingredient.trim().toLowerCase()
+        );
       } else if (type === "ustensil") {
-        elementsArray = element.ustensils.map(ust => ust.trim().toLowerCase());
+        elementsArray = element.ustensils.map((ust) =>
+          ust.trim().toLowerCase()
+        );
       } else if (type === "appliance") {
         elementsArray = [element.appliance.trim().toLowerCase()];
       }
@@ -116,7 +125,10 @@ function createFilterElements(globalData, elementFiltrer, index, type) {
     divModalSelect.appendChild(divModalSelectElement);
 
     // Détermine les éléments à utiliser pour le filtre
-    const elementsToUse = elementFiltrer && elementFiltrer.length > 0 ? elementFiltrer : Array.from(elementSet);
+    const elementsToUse =
+      elementFiltrer && elementFiltrer.length > 0
+        ? elementFiltrer
+        : Array.from(elementSet);
 
     // Affiche chaque élément dans le div de sélection
     elementsToUse.forEach((item) => {
