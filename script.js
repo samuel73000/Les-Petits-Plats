@@ -27,14 +27,21 @@ const boutonInputHeader = document.querySelector(".bouton-input-header");// on r
 let filteredDataMainInput = []; // Initialize globally
 let filteredDataInputTags = []; // Initialize globally
 
+
 function init() {
-  // Display initial data
+  // on fait apparaitre les recettes
   displayData(globalData);
+// on fait apparaitre les tags et on actie les filtre dans les input
   SelectFilterTagIngredients(globalData);
   SelectFilterTagUstensiles(globalData);
   SelectFilterTagAppliance(globalData);
-  // Event listener for main input button
-    // Event listener for main input button
+//function pour filtrer les recettes avec les tags 
+filtreTagReacetteIngredient(globalData);
+filtreTagReacetteUstensiles(globalData);
+filtreTagReacetteAppliance(globalData);
+
+
+    // addeventlistener pour le main input
     boutonInputHeader.addEventListener("click", () => {
       // Update the filtered data from main input
       filteredDataMainInput = filtrageInput(globalData);
@@ -45,15 +52,23 @@ function init() {
       SelectFilterTagIngredients(globalData);
       SelectFilterTagUstensiles(globalData);
       SelectFilterTagAppliance(globalData);
+
+      filtreTagReacetteIngredient(globalData);
+filtreTagReacetteUstensiles(globalData);
+filtreTagReacetteAppliance(globalData);
       } else {
       // Display filtered data if data was filtered
       displayData(filteredDataMainInput); // Update recipe cards
       SelectFilterTagIngredients(filteredDataMainInput); // Update tags
       SelectFilterTagUstensiles(filteredDataMainInput);
       SelectFilterTagAppliance(filteredDataMainInput);
+
+      filtreTagReacetteIngredient(filteredDataMainInput);
+filtreTagReacetteUstensiles(filteredDataMainInput);
+filtreTagReacetteAppliance(filteredDataMainInput);
       }
     
-      // Add event listeners for the tags inside the main input event listener
+      ////////ajoute addeventlistener pour les input des tags une fois que on a filter avec main input////////
       const inputSubit = document.querySelectorAll(".loupe-for-input");
       inputSubit.forEach((input, index) => {
       input.addEventListener("click", () => {
@@ -73,13 +88,12 @@ function init() {
     });
 
 
-
+    /////// ajouter addeventlistener pour les input des tags avant que on filtre avec input principal/////////////
     const tagFilters = [
       { filterFunction: filtreTagIngredient, selectFunction: SelectFilterTagIngredients },
       { filterFunction: filtreTagUstensiles, selectFunction: SelectFilterTagUstensiles },
       { filterFunction: filtreTagAppliance, selectFunction: SelectFilterTagAppliance }
     ];
-
     function handleLoupeForInputClick(event) {
       // Vérifie si l'élément cliqué est un loupe-for-input dans votre modal
       if (event.target.classList.contains('loupe-for-input')) {
@@ -110,7 +124,6 @@ function init() {
         }
       }
     }
-    
     // Ajouter l'écouteur d'événements avec la fonction définie
     document.addEventListener('click', handleLoupeForInputClick);
     
@@ -119,9 +132,7 @@ function init() {
 
 
 
-    filtreTagReacetteIngredient(globalData);
-    filtreTagReacetteUstensiles(globalData);
-    filtreTagReacetteAppliance(globalData);
+   
 }
 
 init();

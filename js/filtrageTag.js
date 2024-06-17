@@ -1,3 +1,5 @@
+import {displayData ,SelectFilterTagIngredients ,SelectFilterTagUstensiles , SelectFilterTagAppliance} from "./display.js";
+
 ///////////////////////Filtre des Tags grace a leur input ////////////////////
 
 // Fonction de filtrage par ingrédients
@@ -86,6 +88,10 @@ export function filtreTagReacetteIngredient(data) {
         return false;
       });
       console.log(filteredData);
+      displayData(filteredData);
+      SelectFilterTagIngredients(filteredData);
+      SelectFilterTagUstensiles(filteredData);
+      SelectFilterTagAppliance(filteredData);
     });
   });
 }
@@ -109,6 +115,10 @@ export function filtreTagReacetteUstensiles(data) {
         return false;
       });
       console.log(filteredData);
+      displayData(filteredData);
+      SelectFilterTagIngredients(filteredData);
+      SelectFilterTagUstensiles(filteredData);
+      SelectFilterTagAppliance(filteredData);
     });
   });
 }
@@ -130,6 +140,10 @@ export function filtreTagReacetteAppliance(data) {
         return false;
       });
       console.log(filteredData);
+      displayData(filteredData);
+      SelectFilterTagIngredients(filteredData);
+      SelectFilterTagUstensiles(filteredData);
+      SelectFilterTagAppliance(filteredData);
     });
   });
 }
