@@ -99,7 +99,6 @@ filtreTagReacetteAppliance(filteredDataMainInput);
       if (event.target.classList.contains('loupe-for-input')) {
         event.preventDefault(); // Empêche le comportement par défaut du clic
         
-        console.log("click");
         const inputSelect = document.querySelectorAll(".input-select");
         const inputValues = Array.from(inputSelect).map(input => input.value.toLowerCase().trim()).filter(value => value !== "");
     

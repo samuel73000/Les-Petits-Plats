@@ -87,7 +87,6 @@ export function filtreTagReacetteIngredient(data) {
         }
         return false;
       });
-      console.log(filteredData);
       displayData(filteredData);
       SelectFilterTagIngredients(filteredData);
       SelectFilterTagUstensiles(filteredData);
@@ -114,7 +113,6 @@ export function filtreTagReacetteUstensiles(data) {
         }
         return false;
       });
-      console.log(filteredData);
       displayData(filteredData);
       SelectFilterTagIngredients(filteredData);
       SelectFilterTagUstensiles(filteredData);
@@ -139,7 +137,6 @@ export function filtreTagReacetteAppliance(data) {
         }
         return false;
       });
-      console.log(filteredData);
       displayData(filteredData);
       SelectFilterTagIngredients(filteredData);
       SelectFilterTagUstensiles(filteredData);

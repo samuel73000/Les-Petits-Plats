@@ -103,10 +103,11 @@ body {
 }
 .div-modal-select {
   z-index: 1000;
-  width: 179px;
+  width: 211px;
   margin-left: -17px;
   height: auto;
-  padding: 17px 16px 17px 16px;
+  padding-top: 17px;
+  padding-bottom: 17px;
   background-color: white;
   border: solid 1px rgb(190, 190, 190);
   border-top: 0;
@@ -124,9 +125,10 @@ body {
   transition-delay: 0s;
 }
 .input-select {
-  width: 95%;
+  width: 85%;
   height: 30px;
   border: solid 1px rgb(190, 190, 190);
+  margin-left: 5%;
 }
 .loupe-for-input {
   position: absolute;
@@ -150,9 +152,16 @@ body {
 .div-modal-select-appliance::-webkit-scrollbar {
   display: none; /* pour Chrome, Safari et Opera */
 }
-.p-select-tag {
+
+.p-select-tag {  
+  padding: 7px 0 7px 5%;
   cursor: pointer;
   font-weight: 400;
+  font-size: 14px;
+  font-family: "Manrope", sans-serif;
+}
+.p-select-tag:hover {
+  background-color: #ffd15b;
 }
 
 
