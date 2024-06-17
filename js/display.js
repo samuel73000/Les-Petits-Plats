@@ -62,56 +62,66 @@ function createFilterElements(globalData, elementFiltrer, index, type) {
   const containerFiltreTagAll = document.querySelectorAll(".container-filtre");
   const textes = ["Ingrédient", "Ustensile", "Appareil"]; // Tableau des textes pour chaque type de filtre
 
-  // Itère sur chaque conteneur de filtre
   containerFiltreTagAll.forEach((container, idx) => {
-    // Vérifie si l'index correspond à l'index du type de filtre
     if (idx !== index) return;
 
-    // Définit le texte du filtre en fonction du type
-    container.textContent = textes[idx % textes.length];
+    // Initialiser seulement une fois
+    if (!container.classList.contains("initialized")) {
+      container.classList.add("initialized");
 
-    // Crée une icône de flèche pour le filtre
-    const SelectFleche = document.createElement("i");
-    SelectFleche.classList.add("fa-solid", "fa-chevron-down", "flecheSelect");
-    container.appendChild(SelectFleche);
+      container.textContent = textes[idx % textes.length];
 
-    // Crée un div pour le sélecteur
-    const divModalSelect = document.createElement("div");
-    divModalSelect.classList.add("div-modal-select");
-    container.appendChild(divModalSelect);
+      const SelectFleche = document.createElement("i");
+      SelectFleche.classList.add("fa-solid", "fa-chevron-down", "flecheSelect");
+      container.appendChild(SelectFleche);
 
-    // Crée un input pour la recherche
-    const inputSelect = document.createElement("input");
-    inputSelect.classList.add("input-select");
-    divModalSelect.appendChild(inputSelect);
+      const divModalSelect = document.createElement("div");
+      divModalSelect.classList.add("div-modal-select");
+      container.appendChild(divModalSelect);
 
-    // Crée une icône loupe pour la recherche
-    const LoupeForInput = document.createElement("i");
-    LoupeForInput.classList.add(
-      "fa-solid",
-      "fa-magnifying-glass",
-      "loupe-for-input"
-    );
-    divModalSelect.appendChild(LoupeForInput);
+      const inputSelect = document.createElement("input");
+      inputSelect.classList.add("input-select");
+      divModalSelect.appendChild(inputSelect);
 
-    // Crée un Set pour stocker les éléments uniques
+      const LoupeForInput = document.createElement("i");
+      LoupeForInput.classList.add(
+        "fa-solid",
+        "fa-magnifying-glass",
+        "loupe-for-input"
+      );
+      divModalSelect.appendChild(LoupeForInput);
+
+      SelectFleche.addEventListener("click", (event) => {
+        event.stopPropagation();
+        SelectFleche.classList.toggle("fa-chevron-down");
+        SelectFleche.classList.toggle("fa-chevron-up");
+        divModalSelect.classList.toggle("visible");
+      });
+    }
+
+    const divModalSelect = container.querySelector(".div-modal-select");
+    let divModalSelectElement = divModalSelect.querySelector(`.div-modal-select-${type}`);
+    
+    // Si l'élément n'existe pas, le créer
+    if (!divModalSelectElement) {
+      divModalSelectElement = document.createElement("div");
+      divModalSelectElement.classList.add(`div-modal-select-${type}`);
+      divModalSelect.appendChild(divModalSelectElement);
+    } else {
+      // Sinon, vider son contenu pour le mettre à jour
+      divModalSelectElement.innerHTML = "";
+    }
+
     let elementSet = new Set();
-
-    // Itère sur chaque recette pour extraire les éléments selon le type
     globalData.forEach((element) => {
       let elementsArray = [];
       if (type === "ingredient") {
-        elementsArray = element.ingredients.map((ing) =>
-          ing.ingredient.trim().toLowerCase()
-        );
+        elementsArray = element.ingredients.map((ing) => ing.ingredient.trim().toLowerCase());
       } else if (type === "ustensil") {
-        elementsArray = element.ustensils.map((ust) =>
-          ust.trim().toLowerCase()
-        );
+        elementsArray = element.ustensils.map((ust) => ust.trim().toLowerCase());
       } else if (type === "appliance") {
         elementsArray = [element.appliance.trim().toLowerCase()];
       }
-      // Ajoute les éléments uniques à l'ensemble
       elementsArray.forEach((item) => {
         if (!elementSet.has(item)) {
           elementSet.add(item);
@@ -119,33 +129,16 @@ function createFilterElements(globalData, elementFiltrer, index, type) {
       });
     });
 
-    // Crée un div pour afficher les éléments filtrés
-    const divModalSelectElement = document.createElement("div");
-    divModalSelectElement.classList.add(`div-modal-select-${type}`);
-    divModalSelect.appendChild(divModalSelectElement);
-
-    // Détermine les éléments à utiliser pour le filtre
-    const elementsToUse =
-      elementFiltrer && elementFiltrer.length > 0
-        ? elementFiltrer
-        : Array.from(elementSet);
-
-    // Affiche chaque élément dans le div de sélection
+    const elementsToUse = elementFiltrer && elementFiltrer.length > 0 ? elementFiltrer : Array.from(elementSet);
     elementsToUse.forEach((item) => {
       const pSelectTag = document.createElement("p");
       pSelectTag.classList.add("p-select-tag");
       pSelectTag.textContent = item;
       divModalSelectElement.appendChild(pSelectTag);
     });
-
-    // Ajoute un événement de clic pour afficher ou masquer les éléments filtrés
-    SelectFleche.addEventListener("click", () => {
-      SelectFleche.classList.toggle("fa-chevron-down");
-      SelectFleche.classList.toggle("fa-chevron-up");
-      divModalSelect.classList.toggle("visible");
-    });
   });
 }
+
 
 // Fonction de filtrage par ingrédients
 export function SelectFilterTagIngredients(globalData, elementFiltrer) {
