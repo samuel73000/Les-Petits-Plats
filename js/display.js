@@ -139,7 +139,6 @@ function createFilterElements(globalData, elementFiltrer, index, type) {
   });
 }
 
-
 // Fonction de filtrage par ingrédients
 export function SelectFilterTagIngredients(globalData, elementFiltrer) {
   createFilterElements(globalData, elementFiltrer, 0, "ingredient");

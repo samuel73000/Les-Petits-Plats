@@ -12,10 +12,9 @@ import { filtrageInput } from "./js/filtrage.js";
 
 // Importation de la fonction filtrageTaginput
 import { filtreTagIngredient ,filtreTagUstensiles ,
-  filtreTagAppliance , filtreTagReacetteIngredient ,filtreTagReacetteUstensiles 
-  ,filtreTagReacetteAppliance} from "./js/filtrageTag.js";
-
-
+  filtreTagAppliance ,filtreTagRecetteIngredient , filtreTagRecetteUstensiles,filtreTagRecetteAppliance  } from "./js/filtrageTag.js";
+ 
+  
 
 // Appel asynchrone à fetchData pour récupérer les données et les stocker dans globalData
 const globalData = await fetchData();
@@ -24,22 +23,23 @@ const globalData = await fetchData();
 const boutonInputHeader = document.querySelector(".bouton-input-header");// on recupere le btn pour submit les filtres 
 
 
-let filteredDataMainInput = []; // Initialize globally
+export let filteredDataMainInput = []; // Initialize globally
 let filteredDataInputTags = []; // Initialize globally
 
 
 function init() {
   // on fait apparaitre les recettes
   displayData(globalData);
+
 // on fait apparaitre les tags et on actie les filtre dans les input
   SelectFilterTagIngredients(globalData);
   SelectFilterTagUstensiles(globalData);
   SelectFilterTagAppliance(globalData);
 //function pour filtrer les recettes avec les tags 
-filtreTagReacetteIngredient(globalData);
-filtreTagReacetteUstensiles(globalData);
-filtreTagReacetteAppliance(globalData);
 
+filtreTagRecetteIngredient(globalData);
+filtreTagRecetteUstensiles(globalData);
+filtreTagRecetteAppliance(globalData);
 
     // addeventlistener pour le main input
     boutonInputHeader.addEventListener("click", () => {
@@ -49,23 +49,29 @@ filtreTagReacetteAppliance(globalData);
       if (filteredDataMainInput.length === 0) { 
       // Display initial data if no data was filtered
       displayData(globalData);
+
       SelectFilterTagIngredients(globalData);
       SelectFilterTagUstensiles(globalData);
       SelectFilterTagAppliance(globalData);
+      
+      filtreTagRecetteIngredient(globalData);
+filtreTagRecetteUstensiles(globalData);
+filtreTagRecetteAppliance(globalData);
 
-      filtreTagReacetteIngredient(globalData);
-filtreTagReacetteUstensiles(globalData);
-filtreTagReacetteAppliance(globalData);
       } else {
       // Display filtered data if data was filtered
       displayData(filteredDataMainInput); // Update recipe cards
+
+
       SelectFilterTagIngredients(filteredDataMainInput); // Update tags
       SelectFilterTagUstensiles(filteredDataMainInput);
       SelectFilterTagAppliance(filteredDataMainInput);
 
-      filtreTagReacetteIngredient(filteredDataMainInput);
-filtreTagReacetteUstensiles(filteredDataMainInput);
-filtreTagReacetteAppliance(filteredDataMainInput);
+  
+
+      filtreTagRecetteIngredient(filteredDataMainInput);
+      filtreTagRecetteUstensiles(filteredDataMainInput);
+      filtreTagRecetteAppliance(filteredDataMainInput);
       }
     
       ////////ajoute addeventlistener pour les input des tags une fois que on a filter avec main input////////
@@ -136,9 +142,9 @@ filtreTagReacetteAppliance(filteredDataMainInput);
 
 
 
+ 
+ 
 
-
-   
 }
 
 init();
