@@ -93,11 +93,15 @@ export function filtreTagRecetteIngredient(data) {
       filteredDataTag = sourceData.filter((recipe) => {
         if (recipe.ingredients && Array.isArray(recipe.ingredients)) {
           return recipe.ingredients.some((ingredient) =>
-            ingredient.ingredient.toLowerCase().includes(searchText)
+            ingredient.ingredient.toLowerCase().includes(searchText),
           );
+    
+
         }
         return false;
       });
+      // Ajouter l'élément filtré à la carte de tags
+      addCardFiltreTag(searchText);
 
       displayData(filteredDataTag);
       SelectFilterTagIngredients(filteredDataTag);
@@ -123,6 +127,7 @@ export function filtreTagRecetteUstensiles(data) {
         }
         return false;
       });
+      addCardFiltreTag(searchText);
 
       displayData(filteredDataTag);
       SelectFilterTagIngredients(filteredDataTag);
@@ -149,6 +154,7 @@ export function filtreTagRecetteAppliance(data) {
         return false;
 
       });
+      addCardFiltreTag(searchText);
 
       displayData(filteredDataTag);
       SelectFilterTagIngredients(filteredDataTag);
@@ -158,4 +164,19 @@ export function filtreTagRecetteAppliance(data) {
   });
 }
 
+function addCardFiltreTag(Element){
+  const sectionTagFiltered = document.querySelector(".container-filtered-tag");
+  
+const divCard = document.createElement("div");
+divCard.classList.add("div-card-filtered-tag");
+sectionTagFiltered.appendChild(divCard);
 
+const	pCard = document.createElement("p");
+pCard.classList.add("p-card-filtered-tag");
+pCard.textContent = Element;
+divCard.appendChild(pCard);
+
+const croixCard = document.createElement("i");
+croixCard.classList.add("fa-solid", "fa-xmark" ,"croix-card-filtered-tag");
+divCard.appendChild(croixCard);
+}

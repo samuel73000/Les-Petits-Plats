@@ -163,6 +163,36 @@ body {
 .p-select-tag:hover {
   background-color: #ffd15b;
 }
+/* les card de tag une fois selectionner */
+.container-filtered-tag{
+  display: flex;
+  flex-direction: row;
+  margin-top: 1%;
+  margin-left: 5%;
+  gap: 20px; 
+}
+.div-card-filtered-tag{
+  position: relative;
+  width: 179px;
+  height: 20px;
+  background-color: #ffd15b;
+  padding:17px 16px 17px 16px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center; 
+}
+.p-card-filtered-tag{
+  font-size: 14px;
+  font-weight: 400;
+  font-family: "Manrope", sans-serif;
+}
+.croix-card-filtered-tag{
+  position: absolute;
+  cursor: pointer;
+  right: 20px;
+  font-size: 18px;
+  
+}
 
 
 
