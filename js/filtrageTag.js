@@ -72,13 +72,10 @@ export function filtreTagAppliance(data) {
   return filteredAppliances;
 }
 
-
-
-
-
-
 // //////////////////// filtrer les recettes grace a tags////////////////////////////////////
-export let filteredDataTag = [];
+
+export let filteredDataTag = []; // Initialisation des données filtrées
+let activeFilters = []; // Liste des filtres actifs
 
 // Fonction de filtrage par ingrédients
 export function filtreTagRecetteIngredient(data) {
@@ -87,53 +84,19 @@ export function filtreTagRecetteIngredient(data) {
   containerTag.addEventListener("click", (event) => {
     if (event.target.classList.contains("p-select-tag")) {
       const searchText = event.target.textContent.trim().toLowerCase();
-
-      const sourceData = filteredDataTag.length > 0 ? filteredDataTag : data;
-
-      filteredDataTag = sourceData.filter((recipe) => {
-        if (recipe.ingredients && Array.isArray(recipe.ingredients)) {
-          return recipe.ingredients.some((ingredient) =>
-            ingredient.ingredient.toLowerCase().includes(searchText),
-          );
-    
-
-        }
-        return false;
-      });
-      // Ajouter l'élément filtré à la carte de tags
-      addCardFiltreTag(searchText);
-
-      displayData(filteredDataTag);
-      SelectFilterTagIngredients(filteredDataTag);
-      SelectFilterTagUstensiles(filteredDataTag);
-      SelectFilterTagAppliance(filteredDataTag);
+      toggleFilter(searchText, data, 'ingredient');
     }
   });
 }
+
 // Fonction de filtrage par ustensiles
 export function filtreTagRecetteUstensiles(data) {
   const containerTag = document.querySelector(".div-modal-select-ustensil");
 
   containerTag.addEventListener("click", (event) => {
     if (event.target.classList.contains("p-select-tag")) {
-      const searchText = event.target.textContent.trim().toLowerCase(); // Assurez-vous que le texte est en minuscules
-      const sourceData = filteredDataTag.length > 0 ? filteredDataTag : data;
-
-      filteredDataTag = sourceData.filter((recipe) => {
-        if (recipe.ustensils && Array.isArray(recipe.ustensils)) {
-          return recipe.ustensils.some((ustensil) =>
-            ustensil.toLowerCase().includes(searchText)
-          );
-        }
-        return false;
-      });
-      addCardFiltreTag(searchText);
-
-      displayData(filteredDataTag);
-      SelectFilterTagIngredients(filteredDataTag);
-      SelectFilterTagUstensiles(filteredDataTag);
-      SelectFilterTagAppliance(filteredDataTag);
-
+      const searchText = event.target.textContent.trim().toLowerCase();
+      toggleFilter(searchText, data, 'ustensil');
     }
   });
 }
@@ -144,39 +107,121 @@ export function filtreTagRecetteAppliance(data) {
 
   containerTag.addEventListener("click", (event) => {
     if (event.target.classList.contains("p-select-tag")) {
-      const searchText = event.target.textContent.trim().toLowerCase(); // Assurez-vous que le texte est en minuscules
-      const sourceData = filteredDataTag.length > 0 ? filteredDataTag : data;
-
-      filteredDataTag = sourceData.filter((recipe) => {
-        if (recipe.appliance && typeof recipe.appliance === "string") {
-          return recipe.appliance.toLowerCase().includes(searchText);
-        }
-        return false;
-
-      });
-      addCardFiltreTag(searchText);
-
-      displayData(filteredDataTag);
-      SelectFilterTagIngredients(filteredDataTag);
-      SelectFilterTagUstensiles(filteredDataTag);
-      SelectFilterTagAppliance(filteredDataTag);
+      const searchText = event.target.textContent.trim().toLowerCase();
+      toggleFilter(searchText, data, 'appliance');
     }
   });
 }
 
-function addCardFiltreTag(Element){
+// Fonction pour ajouter ou supprimer un filtre
+function toggleFilter(element, data, type) {
+  // Vérifier si le filtre est déjà actif
+  const index = activeFilters.indexOf(element);
+
+  if (index === -1) {
+    // Ajouter le filtre à activeFilters
+    activeFilters.push({ element, type });
+    addCardFiltreTag(element, data);
+  } else {
+    // Supprimer le filtre de activeFilters
+    activeFilters = activeFilters.filter(filter => !(filter.element === element && filter.type === type));
+    removeCardFiltreTag(element);
+  }
+
+  // Filtrer les données en fonction des filtres actifs
+  if (activeFilters.length > 0) {
+    filteredDataTag = data.filter((recipe) => {
+      return activeFilters.every(filter => {
+        switch (filter.type) {
+          case 'ingredient':
+            return recipe.ingredients && recipe.ingredients.some(ingredient =>
+              ingredient.ingredient.toLowerCase().includes(filter.element)
+            );
+          case 'ustensil':
+            return recipe.ustensils && recipe.ustensils.some(ustensil =>
+              ustensil.toLowerCase().includes(filter.element)
+            );
+          case 'appliance':
+            return recipe.appliance && recipe.appliance.toLowerCase().includes(filter.element);
+          default:
+            return false;
+        }
+      });
+    });
+  } else {
+    // Si aucun filtre actif, afficher toutes les recettes
+    filteredDataTag = [...data];
+  }
+
+  // Mettre à jour l'affichage des données filtrées
+  displayData(filteredDataTag);
+  SelectFilterTagIngredients(filteredDataTag);
+  SelectFilterTagUstensiles(filteredDataTag);
+  SelectFilterTagAppliance(filteredDataTag);
+}
+
+// Fonction pour ajouter une carte filtrée
+function addCardFiltreTag(element, data) {
   const sectionTagFiltered = document.querySelector(".container-filtered-tag");
-  
-const divCard = document.createElement("div");
-divCard.classList.add("div-card-filtered-tag");
-sectionTagFiltered.appendChild(divCard);
 
-const	pCard = document.createElement("p");
-pCard.classList.add("p-card-filtered-tag");
-pCard.textContent = Element;
-divCard.appendChild(pCard);
+  const divCard = document.createElement("div");
+  divCard.classList.add("div-card-filtered-tag");
+  sectionTagFiltered.appendChild(divCard);
 
-const croixCard = document.createElement("i");
-croixCard.classList.add("fa-solid", "fa-xmark" ,"croix-card-filtered-tag");
-divCard.appendChild(croixCard);
+  const pCard = document.createElement("p");
+  pCard.classList.add("p-card-filtered-tag");
+  pCard.textContent = element;
+  divCard.appendChild(pCard);
+
+  const croixCard = document.createElement("i");
+  croixCard.classList.add("fa-solid", "fa-xmark", "croix-card-filtered-tag");
+  divCard.appendChild(croixCard);
+
+  croixCard.addEventListener("click", () => {
+    divCard.remove(); // Supprime seulement la carte spécifique
+
+    // Supprimer le filtre correspondant de activeFilters
+    activeFilters = activeFilters.filter(filter => !(filter.element === element));
+
+    // Filtrer les données en fonction des filtres actifs restants
+    if (activeFilters.length > 0) {
+      filteredDataTag = data.filter((recipe) => {
+        return activeFilters.every(filter => {
+          switch (filter.type) {
+            case 'ingredient':
+              return recipe.ingredients && recipe.ingredients.some(ingredient =>
+                ingredient.ingredient.toLowerCase().includes(filter.element)
+              );
+            case 'ustensil':
+              return recipe.ustensils && recipe.ustensils.some(ustensil =>
+                ustensil.toLowerCase().includes(filter.element)
+              );
+            case 'appliance':
+              return recipe.appliance && recipe.appliance.toLowerCase().includes(filter.element);
+            default:
+              return false;
+          }
+        });
+      });
+    } else {
+      // Si aucun filtre actif, afficher toutes les recettes
+      filteredDataTag = [...data];
+    }
+
+    // Mettre à jour l'affichage des données filtrées
+    displayData(filteredDataTag);
+    SelectFilterTagIngredients(filteredDataTag);
+    SelectFilterTagUstensiles(filteredDataTag);
+    SelectFilterTagAppliance(filteredDataTag);
+  });
+}
+
+// Fonction pour supprimer une carte filtrée
+function removeCardFiltreTag(element) {
+  const cards = document.querySelectorAll(".div-card-filtered-tag");
+  cards.forEach(card => {
+    if (card.querySelector(".p-card-filtered-tag").textContent === element) {
+      card.remove();
+    }
+  });
 }
