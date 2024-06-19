@@ -72,8 +72,14 @@ export function filtreTagAppliance(data) {
   return filteredAppliances;
 }
 
+
+
+
+
+
 // //////////////////// filtrer les recettes grace a tags////////////////////////////////////
-let filteredData = [];
+export let filteredDataTag = [];
+
 // Fonction de filtrage par ingrédients
 export function filtreTagRecetteIngredient(data) {
   const containerTag = document.querySelector(".div-modal-select-ingredient");
@@ -82,7 +88,9 @@ export function filtreTagRecetteIngredient(data) {
     if (event.target.classList.contains("p-select-tag")) {
       const searchText = event.target.textContent.trim().toLowerCase();
 
-      filteredData = data.filter((recipe) => {
+      const sourceData = filteredDataTag.length > 0 ? filteredDataTag : data;
+
+      filteredDataTag = sourceData.filter((recipe) => {
         if (recipe.ingredients && Array.isArray(recipe.ingredients)) {
           return recipe.ingredients.some((ingredient) =>
             ingredient.ingredient.toLowerCase().includes(searchText)
@@ -91,10 +99,10 @@ export function filtreTagRecetteIngredient(data) {
         return false;
       });
 
-      displayData(filteredData);
-      SelectFilterTagIngredients(filteredData);
-      SelectFilterTagUstensiles(filteredData);
-      SelectFilterTagAppliance(filteredData);
+      displayData(filteredDataTag);
+      SelectFilterTagIngredients(filteredDataTag);
+      SelectFilterTagUstensiles(filteredDataTag);
+      SelectFilterTagAppliance(filteredDataTag);
     }
   });
 }
@@ -105,8 +113,9 @@ export function filtreTagRecetteUstensiles(data) {
   containerTag.addEventListener("click", (event) => {
     if (event.target.classList.contains("p-select-tag")) {
       const searchText = event.target.textContent.trim().toLowerCase(); // Assurez-vous que le texte est en minuscules
+      const sourceData = filteredDataTag.length > 0 ? filteredDataTag : data;
 
-      filteredData = data.filter((recipe) => {
+      filteredDataTag = sourceData.filter((recipe) => {
         if (recipe.ustensils && Array.isArray(recipe.ustensils)) {
           return recipe.ustensils.some((ustensil) =>
             ustensil.toLowerCase().includes(searchText)
@@ -115,10 +124,11 @@ export function filtreTagRecetteUstensiles(data) {
         return false;
       });
 
-      displayData(filteredData);
-      SelectFilterTagIngredients(filteredData);
-      SelectFilterTagUstensiles(filteredData);
-      SelectFilterTagAppliance(filteredData);
+      displayData(filteredDataTag);
+      SelectFilterTagIngredients(filteredDataTag);
+      SelectFilterTagUstensiles(filteredDataTag);
+      SelectFilterTagAppliance(filteredDataTag);
+
     }
   });
 }
@@ -130,18 +140,20 @@ export function filtreTagRecetteAppliance(data) {
   containerTag.addEventListener("click", (event) => {
     if (event.target.classList.contains("p-select-tag")) {
       const searchText = event.target.textContent.trim().toLowerCase(); // Assurez-vous que le texte est en minuscules
+      const sourceData = filteredDataTag.length > 0 ? filteredDataTag : data;
 
-      filteredData = data.filter((recipe) => {
+      filteredDataTag = sourceData.filter((recipe) => {
         if (recipe.appliance && typeof recipe.appliance === "string") {
           return recipe.appliance.toLowerCase().includes(searchText);
         }
         return false;
+
       });
 
-      displayData(filteredData);
-      SelectFilterTagIngredients(filteredData);
-      SelectFilterTagUstensiles(filteredData);
-      SelectFilterTagAppliance(filteredData);
+      displayData(filteredDataTag);
+      SelectFilterTagIngredients(filteredDataTag);
+      SelectFilterTagUstensiles(filteredDataTag);
+      SelectFilterTagAppliance(filteredDataTag);
     }
   });
 }

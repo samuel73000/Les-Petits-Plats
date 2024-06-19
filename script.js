@@ -12,7 +12,7 @@ import { filtrageInput } from "./js/filtrage.js";
 
 // Importation de la fonction filtrageTaginput
 import { filtreTagIngredient ,filtreTagUstensiles ,
-  filtreTagAppliance ,filtreTagRecetteIngredient , filtreTagRecetteUstensiles,filtreTagRecetteAppliance  } from "./js/filtrageTag.js";
+  filtreTagAppliance ,filtreTagRecetteIngredient , filtreTagRecetteUstensiles,filtreTagRecetteAppliance ,filteredDataTag } from "./js/filtrageTag.js";
  
   
 
@@ -58,7 +58,15 @@ filtreTagRecetteAppliance(globalData);
 filtreTagRecetteUstensiles(globalData);
 filtreTagRecetteAppliance(globalData);
 
-      } else {
+
+      }
+      if (filteredDataTag.length !== 0){         
+        filteredDataMainInput = filtrageInput(filteredDataTag);
+     displayData(filteredDataMainInput)
+      }
+      
+      
+      else {
       // Display filtered data if data was filtered
       displayData(filteredDataMainInput); // Update recipe cards
 
