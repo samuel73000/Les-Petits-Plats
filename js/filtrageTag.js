@@ -72,8 +72,7 @@ export function filtreTagAppliance(data) {
   return filteredAppliances;
 }
 
-// //////////////////// filtrer les recettes grace a tags////////////////////////////////////
-
+////////////////////// filtrer les recettes grace a tags////////////////////////////////////
 export let filteredDataTag = []; // Initialisation des données filtrées
 let activeFilters = []; // Liste des filtres actifs
 
@@ -116,7 +115,7 @@ export function filtreTagRecetteAppliance(data) {
 // Fonction pour ajouter ou supprimer un filtre
 function toggleFilter(element, data, type) {
   // Vérifier si le filtre est déjà actif
-  const index = activeFilters.indexOf(element);
+  const index = activeFilters.findIndex(filter => filter.element === element && filter.type === type);
 
   if (index === -1) {
     // Ajouter le filtre à activeFilters
@@ -129,29 +128,7 @@ function toggleFilter(element, data, type) {
   }
 
   // Filtrer les données en fonction des filtres actifs
-  if (activeFilters.length > 0) {
-    filteredDataTag = data.filter((recipe) => {
-      return activeFilters.every(filter => {
-        switch (filter.type) {
-          case 'ingredient':
-            return recipe.ingredients && recipe.ingredients.some(ingredient =>
-              ingredient.ingredient.toLowerCase().includes(filter.element)
-            );
-          case 'ustensil':
-            return recipe.ustensils && recipe.ustensils.some(ustensil =>
-              ustensil.toLowerCase().includes(filter.element)
-            );
-          case 'appliance':
-            return recipe.appliance && recipe.appliance.toLowerCase().includes(filter.element);
-          default:
-            return false;
-        }
-      });
-    });
-  } else {
-    // Si aucun filtre actif, afficher toutes les recettes
-    filteredDataTag = [...data];
-  }
+  filteredDataTag = applyFilters(data, activeFilters);
 
   // Mettre à jour l'affichage des données filtrées
   displayData(filteredDataTag);
@@ -160,60 +137,66 @@ function toggleFilter(element, data, type) {
   SelectFilterTagAppliance(filteredDataTag);
 }
 
+// Fonction pour appliquer les filtres actifs
+function applyFilters(data, filters) {
+  if (filters.length === 0) {
+    return data; // Si aucun filtre actif, retourner toutes les recettes
+  }
+  return data.filter((recipe) => {
+    return filters.every(filter => {
+      switch (filter.type) {
+        case 'ingredient':
+          return recipe.ingredients && recipe.ingredients.some(ingredient =>
+            ingredient.ingredient.toLowerCase().includes(filter.element)
+          );
+        case 'ustensil':
+          return recipe.ustensils && recipe.ustensils.some(ustensil =>
+            ustensil.toLowerCase().includes(filter.element)
+          );
+        case 'appliance':
+          return recipe.appliance && recipe.appliance.toLowerCase().includes(filter.element);
+        default:
+          return false;
+      }
+    });
+  });
+}
+
 // Fonction pour ajouter une carte filtrée
 function addCardFiltreTag(element, data) {
   const sectionTagFiltered = document.querySelector(".container-filtered-tag");
 
-  const divCard = document.createElement("div");
-  divCard.classList.add("div-card-filtered-tag");
-  sectionTagFiltered.appendChild(divCard);
+  // Vérifier si une carte pour ce filtre existe déjà
+  if (!Array.from(sectionTagFiltered.children).some(card => card.querySelector(".p-card-filtered-tag").textContent === element)) {
+    const divCard = document.createElement("div");
+    divCard.classList.add("div-card-filtered-tag");
+    sectionTagFiltered.appendChild(divCard);
 
-  const pCard = document.createElement("p");
-  pCard.classList.add("p-card-filtered-tag");
-  pCard.textContent = element;
-  divCard.appendChild(pCard);
+    const pCard = document.createElement("p");
+    pCard.classList.add("p-card-filtered-tag");
+    pCard.textContent = element;
+    divCard.appendChild(pCard);
 
-  const croixCard = document.createElement("i");
-  croixCard.classList.add("fa-solid", "fa-xmark", "croix-card-filtered-tag");
-  divCard.appendChild(croixCard);
+    const croixCard = document.createElement("i");
+    croixCard.classList.add("fa-solid", "fa-xmark", "croix-card-filtered-tag");
+    divCard.appendChild(croixCard);
 
-  croixCard.addEventListener("click", () => {
-    divCard.remove(); // Supprime seulement la carte spécifique
+    croixCard.addEventListener("click", () => {
+      divCard.remove(); // Supprime seulement la carte spécifique
 
-    // Supprimer le filtre correspondant de activeFilters
-    activeFilters = activeFilters.filter(filter => !(filter.element === element));
+      // Supprimer le filtre correspondant de activeFilters
+      activeFilters = activeFilters.filter(filter => !(filter.element === element));
 
-    // Filtrer les données en fonction des filtres actifs restants
-    if (activeFilters.length > 0) {
-      filteredDataTag = data.filter((recipe) => {
-        return activeFilters.every(filter => {
-          switch (filter.type) {
-            case 'ingredient':
-              return recipe.ingredients && recipe.ingredients.some(ingredient =>
-                ingredient.ingredient.toLowerCase().includes(filter.element)
-              );
-            case 'ustensil':
-              return recipe.ustensils && recipe.ustensils.some(ustensil =>
-                ustensil.toLowerCase().includes(filter.element)
-              );
-            case 'appliance':
-              return recipe.appliance && recipe.appliance.toLowerCase().includes(filter.element);
-            default:
-              return false;
-          }
-        });
-      });
-    } else {
-      // Si aucun filtre actif, afficher toutes les recettes
-      filteredDataTag = [...data];
-    }
+      // Filtrer les données en fonction des filtres actifs restants
+      filteredDataTag = applyFilters(data, activeFilters);
 
-    // Mettre à jour l'affichage des données filtrées
-    displayData(filteredDataTag);
-    SelectFilterTagIngredients(filteredDataTag);
-    SelectFilterTagUstensiles(filteredDataTag);
-    SelectFilterTagAppliance(filteredDataTag);
-  });
+      // Mettre à jour l'affichage des données filtrées
+      displayData(filteredDataTag);
+      SelectFilterTagIngredients(filteredDataTag);
+      SelectFilterTagUstensiles(filteredDataTag);
+      SelectFilterTagAppliance(filteredDataTag);
+    });
+  }
 }
 
 // Fonction pour supprimer une carte filtrée
@@ -225,3 +208,43 @@ function removeCardFiltreTag(element) {
     }
   });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

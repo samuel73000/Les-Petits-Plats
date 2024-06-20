@@ -46,8 +46,9 @@ filtreTagRecetteAppliance(globalData);
       // Update the filtered data from main input
       filteredDataMainInput = filtrageInput(globalData);
     
-      if (filteredDataMainInput.length === 0) { 
-      // Display initial data if no data was filtered
+      if (filteredDataMainInput.length === 0) 
+        { 
+     
       displayData(globalData);
 
       SelectFilterTagIngredients(globalData);
@@ -156,4 +157,3 @@ filtreTagRecetteAppliance(globalData);
 }
 
 init();
-
