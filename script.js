@@ -48,41 +48,37 @@ filtreTagRecetteAppliance(globalData);
     
       if (filteredDataMainInput.length === 0) 
         { 
-     
+
       displayData(globalData);
 
       SelectFilterTagIngredients(globalData);
       SelectFilterTagUstensiles(globalData);
       SelectFilterTagAppliance(globalData);
       
-      filtreTagRecetteIngredient(globalData);
-filtreTagRecetteUstensiles(globalData);
-filtreTagRecetteAppliance(globalData);
 
+  filtreTagRecetteIngredient(globalData);
+  filtreTagRecetteUstensiles(globalData);
+  filtreTagRecetteAppliance(globalData);
 
       }
-      if (filteredDataTag.length !== 0){         
+      if (filteredDataTag.length !== 0)// pemet de filtre avec input quand on a deja filtre avec tags
+        {   
         filteredDataMainInput = filtrageInput(filteredDataTag);
      displayData(filteredDataMainInput)
       }
       
-      
-      else {
-      // Display filtered data if data was filtered
-      displayData(filteredDataMainInput); // Update recipe cards
+    
+    if (filteredDataMainInput.length !== 0){
+      displayData(filteredDataMainInput); 
 
-
-      SelectFilterTagIngredients(filteredDataMainInput); // Update tags
+      SelectFilterTagIngredients(filteredDataMainInput); 
       SelectFilterTagUstensiles(filteredDataMainInput);
       SelectFilterTagAppliance(filteredDataMainInput);
-
-  
 
       filtreTagRecetteIngredient(filteredDataMainInput);
       filtreTagRecetteUstensiles(filteredDataMainInput);
       filtreTagRecetteAppliance(filteredDataMainInput);
       }
-    
       ////////ajoute addeventlistener pour les input des tags une fois que on a filter avec main input////////
     document.addEventListener('DOMContentLoaded', () => {
       const inputSubit = document.querySelectorAll(".loupe-for-input");
@@ -149,11 +145,11 @@ filtreTagRecetteAppliance(globalData);
     document.addEventListener('click', handleLoupeForInputClick);
     
 
-
-
- 
- 
-
 }
 
 init();
+
+
+
+
+
