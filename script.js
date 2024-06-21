@@ -61,7 +61,7 @@ filtreTagRecetteAppliance(globalData);
   filtreTagRecetteAppliance(globalData);
 
       }
-      if (filteredDataTag.length !== 0)// pemet de filtre avec input quand on a deja filtre avec tags
+      if (filteredDataTag.length !== 0)// permet de filtre avec input quand on a deja filtre avec tags
         {   
         filteredDataMainInput = filtrageInput(filteredDataTag);
      displayData(filteredDataMainInput)
