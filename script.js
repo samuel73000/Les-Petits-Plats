@@ -79,6 +79,17 @@ filtreTagRecetteAppliance(globalData);
       filtreTagRecetteUstensiles(filteredDataMainInput);
       filtreTagRecetteAppliance(filteredDataMainInput);
       }
+      if (filteredDataMainInput.length !== 0 || filteredDataTag.length !== 0){
+        displayData(filteredDataMainInput)
+
+        SelectFilterTagIngredients(filteredDataMainInput); 
+        SelectFilterTagUstensiles(filteredDataMainInput);
+        SelectFilterTagAppliance(filteredDataMainInput);
+  
+        filtreTagRecetteIngredient(filteredDataMainInput);
+        filtreTagRecetteUstensiles(filteredDataMainInput);
+        filtreTagRecetteAppliance(filteredDataMainInput);
+      }
       ////////ajoute addeventlistener pour les input des tags une fois que on a filter avec main input////////
     document.addEventListener('DOMContentLoaded', () => {
       const inputSubit = document.querySelectorAll(".loupe-for-input");
