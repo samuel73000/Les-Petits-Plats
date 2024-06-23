@@ -8,7 +8,7 @@ import { displayData, SelectFilterTagIngredients , SelectFilterTagUstensiles ,Se
 import { fetchData } from "./js/api.js";
 
 // Importation de la fonction filtrageInput
-import { filtrageInput } from "./js/filtrage.js";
+import { filtrageInput , messageErreur } from "./js/filtrage.js";
 
 // Importation de la fonction filtrageTaginput
 import { filtreTagIngredient ,filtreTagUstensiles ,
@@ -46,21 +46,10 @@ filtreTagRecetteAppliance(globalData);
       // Update the filtered data from main input
       filteredDataMainInput = filtrageInput(globalData);
     
-      if (filteredDataMainInput.length === 0) 
-        { 
-
-      displayData(globalData);
-
-      SelectFilterTagIngredients(globalData);
-      SelectFilterTagUstensiles(globalData);
-      SelectFilterTagAppliance(globalData);
-      
-
-  filtreTagRecetteIngredient(globalData);
-  filtreTagRecetteUstensiles(globalData);
-  filtreTagRecetteAppliance(globalData);
-
+      if (filteredDataMainInput.length === 0) { 
+        messageErreur(globalData);
       }
+
       if (filteredDataTag.length !== 0)// permet de filtre avec input quand on a deja filtre avec tags
         {   
         filteredDataMainInput = filtrageInput(filteredDataTag);

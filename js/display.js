@@ -4,7 +4,6 @@ export function displayData(globalData) {
   const containerRecetteAll = document.querySelector(".container-recette-all");
   // Sélectionne l'élément qui affiche le nombre de recettes
   const nombreRecette = document.querySelector(".nombre-recette");
-
   // Efface le contenu précédent du conteneur
   containerRecetteAll.innerHTML = "";
 
@@ -52,9 +51,10 @@ export function displayData(globalData) {
           </div>
           `;
 
-    // Ajoute l'article créé au conteneur principal
-    containerRecetteAll.appendChild(NewArticleRecette);
+        containerRecetteAll.appendChild(NewArticleRecette);
+
   });
+  
 }
 
 // Cette fonction createFilterElements prend en paramètres globalData (les données globales des recettes), elementFiltrer (les éléments à filtrer), index (l'index du type de filtre), et type (le type de filtre : "ingredient", "ustensil", ou "appliance").
