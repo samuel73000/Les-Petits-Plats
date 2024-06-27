@@ -1,6 +1,3 @@
-import { displayData } from "../js/display.js";
-
-
 let value = ""; // Déclaration d'une variable pour stocker la valeur de l'input
 let filteredDataInput = [];
 export function filtrageInput(globalData) {
