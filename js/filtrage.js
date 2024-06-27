@@ -44,11 +44,8 @@ export function filtrageInput(globalData) {
   return filteredDataInput;
 }
 
-export function messageErreur(globalData) {
+export function messageErreur() {
   const containerRecetteAll = document.querySelector(".container-recette-all");
-  if(value.length !== 0){
   containerRecetteAll.innerHTML = `<div class='message-erreur'>Aucune recette ne contient ‘${value}’ vous pouvez chercher «tarte aux pommes », « poisson », etc.</div>`;
-  }else{
- displayData(globalData);
   }
-}
+
