@@ -105,9 +105,9 @@ function init() {
       filtreTagRecetteAppliance(filteredDataMainInput);
     }
     // si on aucun resulat on affiche un message d'erreur
-    if (filteredDataMainInput.length === 0) {
-      messageErreur();
-    }
+    // if (filteredDataMainInput.length === 0) {
+    //   messageErreur();
+    // }
 
     ////////ajoute addeventlistener pour les input des tags une fois que on a filter avec main input////////
     document.addEventListener("DOMContentLoaded", () => {
