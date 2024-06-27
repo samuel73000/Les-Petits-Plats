@@ -1,8 +1,6 @@
-import { displayData } from "../js/display.js";
-
-
 let value = ""; // Déclaration d'une variable pour stocker la valeur de l'input
 let filteredDataInput = [];
+
 export function filtrageInput(globalData) {
   // Sélection des éléments du DOM pour l'input et le bouton
   const inputMain = document.querySelector(".input-header");
@@ -12,33 +10,36 @@ export function filtrageInput(globalData) {
   
   // Vérification que la valeur saisie contient au moins 3 caractères
   if (value.length >= 3) {
-    // Filtrage des données par nom
-    let filteredByName = globalData.filter(
-      (item) => item.name.toLowerCase().includes(value.toLowerCase()) // Si le nom de la recette contient la valeur saisie, alors le push dans le tableau filteredData
-    );
+    // Déclaration d'un Set pour stocker les données filtrées sans doublons
+    const filteredSet = new Set();
 
-    // Filtrage des données par description
-    let filteredByDescription = globalData.filter(
-      (item) => item.description.toLowerCase().includes(value.toLowerCase()) // Si la description de la recette contient la valeur saisie, alors le push dans le tableau filteredData
-    );
+    // Boucle pour filtrer par nom, description, et ingrédients
+    for (const item of globalData) {
+      const lowerCaseValue = value.toLowerCase();
 
-    // Filtrage des données par ingrédients
-    let filteredByIngredients = globalData.filter(
-      (item) =>
-        item.ingredients.some(
-          (ingredient) =>
-            ingredient.ingredient.toLowerCase().includes(value.toLowerCase()) // Si les ingrédients de la recette contiennent la valeur saisie, alors le push dans le tableau filteredData
-        )
-    );
+      // Vérification par nom
+      if (item.name.toLowerCase().includes(lowerCaseValue)) {
+        filteredSet.add(item);
+      }
 
-    // Combinaison des résultats des trois filtres en éliminant les doublons
-    filteredDataInput = [
-      ...new Set([
-        ...filteredByName,
-        ...filteredByDescription,
-        ...filteredByIngredients,
-      ]),
-    ];
+      // Vérification par description
+      if (item.description.toLowerCase().includes(lowerCaseValue)) {
+        filteredSet.add(item);
+      }
+
+      // Vérification par ingrédients
+      for (const ingredient of item.ingredients) {
+        if (ingredient.ingredient.toLowerCase().includes(lowerCaseValue)) {
+          filteredSet.add(item);
+          break; // Sortir de la boucle des ingrédients si un match est trouvé
+        }
+      }
+    }
+
+    // Conversion du Set en tableau
+    filteredDataInput = Array.from(filteredSet);
+  } else {
+    filteredDataInput = []; // Réinitialiser si la valeur est inférieure à 3 caractères
   }
 
   return filteredDataInput;
