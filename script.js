@@ -106,7 +106,14 @@ function init() {
     }
     // si on aucun resulat on affiche un message d'erreur
     if (filteredDataMainInput.length === 0) {
-      messageErreur();
+      messageErreur(); // Affiche le message d'erreur
+      filteredDataMainInput = filtrageInput(filteredDataTag);
+
+      SelectFilterTagIngredients(filteredDataMainInput);
+
+      SelectFilterTagUstensiles(filteredDataMainInput);
+
+      SelectFilterTagAppliance(filteredDataMainInput);
     }
 
     ////////ajoute addeventlistener pour les input des tags une fois que on a filter avec main input////////

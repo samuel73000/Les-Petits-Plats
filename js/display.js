@@ -38,7 +38,7 @@ export function displayData(globalData) {
     }
     // Définit le contenu HTML de l'article de la recette
     NewArticleRecette.innerHTML = `
-          <img class="img-recette" src="./Photos recette/${element.image}" alt="${element.name}" >
+          <img class="img-recette" src="./photos_recette/${element.image}" alt="${element.name}" >
           <div class="timer-recette">${element.time}min</div>
           <div class="description-recette">
           <h2 class="nom-de-recette">${element.name}</h2>
@@ -60,7 +60,7 @@ export function displayData(globalData) {
 // Cette fonction createFilterElements prend en paramètres globalData (les données globales des recettes), elementFiltrer (les éléments à filtrer), index (l'index du type de filtre), et type (le type de filtre : "ingredient", "ustensil", ou "appliance").
 function createFilterElements(globalData, elementFiltrer, index, type) {
   const containerFiltreTagAll = document.querySelectorAll(".container-filtre");
-  const textes = ["Ingrédient", "Ustensile", "Appareil"]; // Tableau des textes pour chaque type de filtre
+  const textes = ["Ingrédients", "Ustensiles", "Appareils"]; // Tableau des textes pour chaque type de filtre
 
   containerFiltreTagAll.forEach((container, idx) => {
     if (idx !== index) return;
@@ -83,13 +83,13 @@ function createFilterElements(globalData, elementFiltrer, index, type) {
       inputSelect.classList.add("input-select");
       divModalSelect.appendChild(inputSelect);
 
-      const LoupeForInput = document.createElement("i");
-      LoupeForInput.classList.add(
+      const loupeForInput = document.createElement("i");
+      loupeForInput.classList.add(
         "fa-solid",
         "fa-magnifying-glass",
         "loupe-for-input"
       );
-      divModalSelect.appendChild(LoupeForInput);
+      divModalSelect.appendChild(loupeForInput);
 
       SelectFleche.addEventListener("click", (event) => {
         event.stopPropagation();
