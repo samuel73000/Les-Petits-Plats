@@ -57,22 +57,22 @@ function init() {
     setTimeout(() => {
       // si on tape rien dans l'input main et que il y a pas de tag on affiche toutes les recettes
       if (
-        inputHeader.value.length === 0 &&
+        inputHeader.value.length <3 &&
         containerFilteredtTag.children.length === 0
       ) {
         displayData(globalData);
       }
       // si on filtre avec tag puis avec input et que on supp input on revien au filtre tag
-      if (inputHeader.value.length === 0 && filteredDataTag.length !== 0) {
-        displayData(filteredDataTag);
-        SelectFilterTagIngredients(filteredDataTag);
-        SelectFilterTagUstensiles(filteredDataTag);
-        SelectFilterTagAppliance(filteredDataTag);
+      // if (inputHeader.value.length === 0 && filteredDataTag.length !== 0) {
+      //   displayData(filteredDataTag);
+      //   SelectFilterTagIngredients(filteredDataTag);
+      //   SelectFilterTagUstensiles(filteredDataTag);
+      //   SelectFilterTagAppliance(filteredDataTag);
 
-        filtreTagRecetteIngredient(filteredDataTag);
-        filtreTagRecetteUstensiles(filteredDataTag);
-        filtreTagRecetteAppliance(filteredDataTag);
-      }
+      //   filtreTagRecetteIngredient(filteredDataTag);
+      //   filtreTagRecetteUstensiles(filteredDataTag);
+      //   filtreTagRecetteAppliance(filteredDataTag);
+      // }
     }, 0);
 
     // permet de filtrer avec input quand on a deja filtre avec tags
@@ -92,8 +92,19 @@ function init() {
       filtreTagRecetteIngredient(globalData);
       filtreTagRecetteUstensiles(globalData);
       filtreTagRecetteAppliance(globalData);
+    }if(filteredDataMainInput.length !== 0){
+      displayData(filteredDataMainInput);
+
+      SelectFilterTagIngredients(filteredDataMainInput);
+      SelectFilterTagUstensiles(filteredDataMainInput);
+      SelectFilterTagAppliance(filteredDataMainInput);
+
+      filtreTagRecetteIngredient(filteredDataMainInput);
+      filtreTagRecetteUstensiles(filteredDataMainInput);
+      filtreTagRecetteAppliance(filteredDataMainInput);
     }
-    if (filteredDataMainInput.length !== 0 || filteredDataTag.length !== 0) {
+
+    if (filteredDataMainInput.length !== 0|| filteredDataTag.length !== 0 ) {
       displayData(filteredDataMainInput);
 
       SelectFilterTagIngredients(filteredDataMainInput);
@@ -105,7 +116,7 @@ function init() {
       filtreTagRecetteAppliance(filteredDataMainInput);
     }
     // si on aucun resulat on affiche un message d'erreur
-    if (filteredDataMainInput.length === 0) {
+    if (filteredDataMainInput.length ===0) {
       messageErreur(); // Affiche le message d'erreur
       filteredDataMainInput = filtrageInput(filteredDataTag);
 
