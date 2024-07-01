@@ -1,4 +1,4 @@
-// Ce fichier script.js sert de point d'entrée pour l'initialisation et la gestion des interactions dans l'application.
+// // Ce fichier script.js sert de point d'entrée pour l'initialisation et la gestion des interactions dans l'application.
 // Il importe et utilise des fonctions depuis d'autres modules pour afficher et filtrer les données.
 
 // Importation de la fonction displayData depuis le fichier display.js
@@ -54,26 +54,6 @@ function init() {
     // Update the filtered data from main input
     filteredDataMainInput = filtrageInput(globalData);
 
-    setTimeout(() => {
-      // si on tape rien dans l'input main et que il y a pas de tag on affiche toutes les recettes
-      if (
-        inputHeader.value.length <3 &&
-        containerFilteredtTag.children.length === 0
-      ) {
-        displayData(globalData);
-      }
-      // si on filtre avec tag puis avec input et que on supp input on revien au filtre tag
-      // if (inputHeader.value.length === 0 && filteredDataTag.length !== 0) {
-      //   displayData(filteredDataTag);
-      //   SelectFilterTagIngredients(filteredDataTag);
-      //   SelectFilterTagUstensiles(filteredDataTag);
-      //   SelectFilterTagAppliance(filteredDataTag);
-
-      //   filtreTagRecetteIngredient(filteredDataTag);
-      //   filtreTagRecetteUstensiles(filteredDataTag);
-      //   filtreTagRecetteAppliance(filteredDataTag);
-      // }
-    }, 0);
 
     // permet de filtrer avec input quand on a deja filtre avec tags
     if (filteredDataTag.length !== 0 && inputHeader.value.length !== 0) {
@@ -115,6 +95,29 @@ function init() {
       filtreTagRecetteUstensiles(filteredDataMainInput);
       filtreTagRecetteAppliance(filteredDataMainInput);
     }
+
+
+
+
+
+
+    
+     // si on filtre avec tag puis avec input et que on supp input on revien au filtre tag
+     if (inputHeader.value.length === 0 && filteredDataTag.length !== 0) {
+      displayData(filteredDataTag);
+      SelectFilterTagIngredients(filteredDataTag);
+      SelectFilterTagUstensiles(filteredDataTag);
+      SelectFilterTagAppliance(filteredDataTag);
+
+      filtreTagRecetteIngredient(filteredDataTag);
+      filtreTagRecetteUstensiles(filteredDataTag);
+      filtreTagRecetteAppliance(filteredDataTag);
+    }
+
+
+
+
+
     // si on aucun resulat on affiche un message d'erreur
     if (filteredDataMainInput.length ===0) {
       messageErreur(); // Affiche le message d'erreur
@@ -127,6 +130,23 @@ function init() {
       SelectFilterTagAppliance(filteredDataMainInput);
     }
 
+
+
+
+
+
+    if (
+      inputHeader.value.length <3 &&
+      containerFilteredtTag.children.length === 0
+    ) {
+      // filteredDataTag = [];
+      filteredDataMainInput = [];
+      filteredDataInputTags = [];
+      displayData(globalData);
+        SelectFilterTagIngredients(globalData);
+        SelectFilterTagUstensiles(globalData);
+        SelectFilterTagAppliance(globalData);
+    }
     ////////ajoute addeventlistener pour les input des tags une fois que on a filter avec main input////////
     document.addEventListener("DOMContentLoaded", () => {
       const inputSubit = document.querySelectorAll(".loupe-for-input");
@@ -222,3 +242,90 @@ function init() {
 }
 
 init();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
