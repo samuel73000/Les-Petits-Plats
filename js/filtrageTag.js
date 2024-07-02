@@ -5,18 +5,27 @@ import {
   SelectFilterTagAppliance,
 } from "./display.js";
 
-///////////////////////Filtre des Tags grace a leur input ////////////////////
+/////////////////////// Filtre des Tags grâce à leur input ////////////////////
 
 // Fonction de filtrage par ingrédients
 export function filtreTagIngredient(data) {
+  // Sélectionne tous les éléments input avec la classe 'input-select'
   const inputSelect = document.querySelectorAll(".input-select");
+
+  // Récupère les valeurs des inputs, les convertit en minuscule, enlève les espaces et filtre les valeurs non vides
   const inputValues = Array.from(inputSelect)
     .map((input) => input.value.toLowerCase().trim())
     .filter((value) => value !== "");
+
   let filteredIngredients = [];
+
+  // Parcourt chaque recette
   data.forEach((recipe) => {
+    // Parcourt chaque ingrédient de la recette
     recipe.ingredients.forEach((ingredient) => {
+      // Parcourt chaque valeur d'input
       inputValues.forEach((inputValue) => {
+        // Si l'ingrédient contient la valeur de l'input et n'est pas déjà dans la liste filtrée, l'ajoute
         if (
           ingredient.ingredient.toLowerCase().includes(inputValue) &&
           !filteredIngredients.includes(ingredient.ingredient) &&
@@ -32,14 +41,23 @@ export function filtreTagIngredient(data) {
 
 // Fonction de filtrage par ustensiles
 export function filtreTagUstensiles(data) {
+  // Sélectionne tous les éléments input avec la classe 'input-select'
   const inputSelect = document.querySelectorAll(".input-select");
+
+  // Récupère les valeurs des inputs, les convertit en minuscule, enlève les espaces et filtre les valeurs non vides
   const inputValues = Array.from(inputSelect)
     .map((input) => input.value.toLowerCase().trim())
     .filter((value) => value !== "");
+
   let filteredUstensils = [];
+
+  // Parcourt chaque recette
   data.forEach((recipe) => {
+    // Parcourt chaque ustensile de la recette
     recipe.ustensils.forEach((ustensil) => {
+      // Parcourt chaque valeur d'input
       inputValues.forEach((inputValue) => {
+        // Si l'ustensile contient la valeur de l'input et n'est pas déjà dans la liste filtrée, l'ajoute
         if (
           ustensil.toLowerCase().includes(inputValue) &&
           !filteredUstensils.includes(ustensil)
@@ -54,13 +72,21 @@ export function filtreTagUstensiles(data) {
 
 // Fonction de filtrage par appareil
 export function filtreTagAppliance(data) {
+  // Sélectionne tous les éléments input avec la classe 'input-select'
   const inputSelect = document.querySelectorAll(".input-select");
+
+  // Récupère les valeurs des inputs, les convertit en minuscule, enlève les espaces et filtre les valeurs non vides
   const inputValues = Array.from(inputSelect)
     .map((input) => input.value.toLowerCase().trim())
     .filter((value) => value !== "");
+
   let filteredAppliances = [];
+
+  // Parcourt chaque recette
   data.forEach((recipe) => {
+    // Parcourt chaque valeur d'input
     inputValues.forEach((inputValue) => {
+      // Si l'appareil contient la valeur de l'input et n'est pas déjà dans la liste filtrée, l'ajoute
       if (
         recipe.appliance.toLowerCase().includes(inputValue) &&
         !filteredAppliances.includes(recipe.appliance)
@@ -72,7 +98,7 @@ export function filtreTagAppliance(data) {
   return filteredAppliances;
 }
 
-////////////////////// filtrer les recettes grace a tags////////////////////////////////////
+////////////////////// Filtrer les recettes grâce aux tags //////////////////////
 export let filteredDataTag = []; // Initialisation des données filtrées
 let activeFilters = []; // Liste des filtres actifs
 
@@ -114,23 +140,23 @@ export function filtreTagRecetteAppliance(data) {
 
 // Fonction pour ajouter ou supprimer un filtre
 function toggleFilter(element, data, type) {
-  // Vérifier si le filtre est déjà actif
+  // Vérifie si le filtre est déjà actif
   const index = activeFilters.findIndex(filter => filter.element === element && filter.type === type);
 
   if (index === -1) {
-    // Ajouter le filtre à activeFilters
+    // Ajoute le filtre à activeFilters
     activeFilters.push({ element, type });
     addCardFiltreTag(element, data);
   } else {
-    // Supprimer le filtre de activeFilters
+    // Supprime le filtre de activeFilters
     activeFilters = activeFilters.filter(filter => !(filter.element === element && filter.type === type));
     removeCardFiltreTag(element);
   }
 
-  // Filtrer les données en fonction des filtres actifs
+  // Filtre les données en fonction des filtres actifs
   filteredDataTag = applyFilters(data, activeFilters);
 
-  // Mettre à jour l'affichage des données filtrées
+  // Met à jour l'affichage des données filtrées
   displayData(filteredDataTag);
   SelectFilterTagIngredients(filteredDataTag);
   SelectFilterTagUstensiles(filteredDataTag);
@@ -140,7 +166,7 @@ function toggleFilter(element, data, type) {
 // Fonction pour appliquer les filtres actifs
 function applyFilters(data, filters) {
   if (filters.length === 0) {
-    return data; // Si aucun filtre actif, retourner toutes les recettes
+    return data; // Si aucun filtre actif, retourne toutes les recettes
   }
   return data.filter((recipe) => {
     return filters.every(filter => {
@@ -166,7 +192,7 @@ function applyFilters(data, filters) {
 function addCardFiltreTag(element, data) {
   const sectionTagFiltered = document.querySelector(".container-filtered-tag");
 
-  // Vérifier si une carte pour ce filtre existe déjà
+  // Vérifie si une carte pour ce filtre existe déjà
   if (!Array.from(sectionTagFiltered.children).some(card => card.querySelector(".p-card-filtered-tag").textContent === element)) {
     const divCard = document.createElement("div");
     divCard.classList.add("div-card-filtered-tag");
@@ -184,13 +210,13 @@ function addCardFiltreTag(element, data) {
     croixCard.addEventListener("click", () => {
       divCard.remove(); // Supprime seulement la carte spécifique
 
-      // Supprimer le filtre correspondant de activeFilters
+      // Supprime le filtre correspondant de activeFilters
       activeFilters = activeFilters.filter(filter => !(filter.element === element));
 
-      // Filtrer les données en fonction des filtres actifs restants
+      // Filtre les données en fonction des filtres actifs restants
       filteredDataTag = applyFilters(data, activeFilters);
 
-      // Mettre à jour l'affichage des données filtrées
+      // Met à jour l'affichage des données filtrées
       displayData(filteredDataTag);
       SelectFilterTagIngredients(filteredDataTag);
       SelectFilterTagUstensiles(filteredDataTag);
@@ -208,43 +234,3 @@ function removeCardFiltreTag(element) {
     }
   });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

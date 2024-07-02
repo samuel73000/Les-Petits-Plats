@@ -1,22 +1,26 @@
-let value = ""; // Déclaration d'une variable pour stocker la valeur de l'input
+// Déclaration d'une variable pour stocker la valeur de l'input
+let value = "";
+// Déclaration d'un tableau pour stocker les données filtrées
 let filteredDataInput = [];
+
+// Fonction pour filtrer les données en fonction de la valeur de l'input
 export function filtrageInput(globalData) {
-  // Sélection des éléments du DOM pour l'input et le bouton
+  // Sélection de l'élément du DOM pour l'input principal
   const inputMain = document.querySelector(".input-header");
 
   // Récupération de la valeur de l'input
-  value = inputMain.value; // Déclaration d'un tableau pour stocker les données filtrées
-  
+  value = inputMain.value;
+
   // Vérification que la valeur saisie contient au moins 3 caractères
   if (value.length >= 3) {
     // Filtrage des données par nom
     let filteredByName = globalData.filter(
-      (item) => item.name.toLowerCase().includes(value.toLowerCase()) // Si le nom de la recette contient la valeur saisie, alors le push dans le tableau filteredData
+      (item) => item.name.toLowerCase().includes(value.toLowerCase()) 
     );
 
     // Filtrage des données par description
     let filteredByDescription = globalData.filter(
-      (item) => item.description.toLowerCase().includes(value.toLowerCase()) // Si la description de la recette contient la valeur saisie, alors le push dans le tableau filteredData
+      (item) => item.description.toLowerCase().includes(value.toLowerCase()) 
     );
 
     // Filtrage des données par ingrédients
@@ -24,7 +28,7 @@ export function filtrageInput(globalData) {
       (item) =>
         item.ingredients.some(
           (ingredient) =>
-            ingredient.ingredient.toLowerCase().includes(value.toLowerCase()) // Si les ingrédients de la recette contiennent la valeur saisie, alors le push dans le tableau filteredData
+            ingredient.ingredient.toLowerCase().includes(value.toLowerCase()) 
         )
     );
 
@@ -38,11 +42,15 @@ export function filtrageInput(globalData) {
     ];
   }
 
+  // Retourne les données filtrées
   return filteredDataInput;
 }
 
+// Fonction pour afficher un message d'erreur si aucune recette ne correspond à la recherche
 export function messageErreur() {
+  // Sélection de l'élément du DOM pour le conteneur des recettes
   const containerRecetteAll = document.querySelector(".container-recette-all");
-  containerRecetteAll.innerHTML = `<div class='message-erreur'>Aucune recette ne contient ‘${value}’ vous pouvez chercher «tarte aux pommes », « poisson », etc.</div>`;
-  }
 
+  // Insertion du message d'erreur dans le conteneur des recettes
+  containerRecetteAll.innerHTML = `<div class='message-erreur'>Aucune recette ne contient ‘${value}’ vous pouvez chercher «tarte aux pommes », « poisson », etc.</div>`;
+}

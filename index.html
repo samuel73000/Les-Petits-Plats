@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
 
     <title>Les petits plats</title>
+    <!-- Importation des polices Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One"
       rel="stylesheet"
@@ -18,18 +19,23 @@
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
       rel="stylesheet"
     />
+    <!-- Importation de Font Awesome pour les icônes -->
     <script src="https://kit.fontawesome.com/a9b6e17bb7.js" crossorigin="anonymous"></script>
+    <!-- Importation du fichier CSS -->
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
     <header class="header">
+      <!-- Logo du site -->
       <img class="logo-header" src="/Asset/Logo.png" alt="logo du site" />
       <div class="container-titre-header">
+        <!-- Titre principal du site -->
         <h1 class="titre-header">
-          CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN,SIMPLES ET DÉLICIEUSES
+          CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN, SIMPLES ET DÉLICIEUSES
         </h1>
         <div class="container-input-header">
+          <!-- Barre de recherche pour les recettes -->
           <input
             class="input-header"
             type="text"
@@ -37,34 +43,31 @@
           />
           <button class="bouton-input-header">
             <i class="fa fa-search loupe-input-header"></i>
-            <!-- on peut prendre avec des trait plus petits il faut payer fontowesome-->
+            <!-- Icône de la loupe pour le bouton de recherche -->
           </button>
         </div>
       </div>
     </header>
     <main>
       <section class="container-filtre-all-plus-nombre-recette">
-
+        <!-- Conteneur pour les filtres et le nombre de recettes trouvées -->
         <div class="container-filtre-all">
-          <div class="container-filtre">
-           
-          </div>
-          <div class="container-filtre">
-           
-          </div>
-          <div class="container-filtre">
-          
-          </div>
+          <!-- Trois conteneurs pour les filtres (à remplir plus tard) -->
+          <div class="container-filtre"></div>
+          <div class="container-filtre"></div>
+          <div class="container-filtre"></div>
         </div>
+        <!-- Paragraphe pour afficher le nombre de recettes trouvées -->
         <p class="nombre-recette"></p>
       </section>
-<section class="container-filtered-tag">
 
-</section>
-      <section class="container-recette-all">
-        <!-- Section où les recettes apparaissent -->
-      </section>
+      <!-- Section pour afficher les tags filtrés -->
+      <section class="container-filtered-tag"></section>
+
+      <!-- Section où les recettes apparaissent -->
+      <section class="container-recette-all"></section>
     </main>
+    <!-- Importation du fichier JavaScript -->
     <script src="script.js" type="module"></script>
   </body>
 </html>

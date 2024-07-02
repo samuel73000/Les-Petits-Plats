@@ -1,4 +1,4 @@
-// function pour afficher les recettes dans le DOM
+// Fonction pour afficher les recettes dans le DOM
 export function displayData(globalData) {
   // Sélectionne le conteneur principal pour toutes les recettes
   const containerRecetteAll = document.querySelector(".container-recette-all");
@@ -17,6 +17,7 @@ export function displayData(globalData) {
     NewArticleRecette.classList.add("container-recette");
     // Ajoute un id à l'article basé sur l'id de la recette
     NewArticleRecette.setAttribute("id", element.id);
+
     // Initialise une variable pour construire le HTML des ingrédients
     let ingredientsHTML = "";
     // Boucle sur chaque ingrédient de la recette
@@ -28,39 +29,39 @@ export function displayData(globalData) {
         const unit = element.ingredients[i].unit || ""; // Utilise une chaîne vide si unit est undefined
         ingredientsHTML += `
                   <div>
-                    <h3 class="titre-ingredients">${
-                      element.ingredients[i].ingredient
-                    }</h3>
+                    <h3 class="titre-ingredients">${element.ingredients[i].ingredient}</h3>
                     <p class="ingredients">${quantity + " " + unit}</p>
                   </div>
                   `;
       }
     }
+
     // Définit le contenu HTML de l'article de la recette
     NewArticleRecette.innerHTML = `
-          <img class="img-recette" src="./photos_recette/${element.image}" alt="${element.name}" >
+          <img class="img-recette" src="./photos_recette/${element.image}" alt="${element.name}">
           <div class="timer-recette">${element.time}min</div>
           <div class="description-recette">
-          <h2 class="nom-de-recette">${element.name}</h2>
-          <p class="titre-recette">Recette</p>
-          <p class="instruction-recette">${element.description}</p>
-          <p class="titre-recette">INGRÉDIENTS</p>
+            <h2 class="nom-de-recette">${element.name}</h2>
+            <p class="titre-recette">Recette</p>
+            <p class="instruction-recette">${element.description}</p>
+            <p class="titre-recette">INGRÉDIENTS</p>
           </div>
           <div class="container-ingredients-recette">
               ${ingredientsHTML}
           </div>
           `;
 
-        containerRecetteAll.appendChild(NewArticleRecette);
-
+    // Ajoute l'article de la recette au conteneur principal
+    containerRecetteAll.appendChild(NewArticleRecette);
   });
-  
 }
 
-// Cette fonction createFilterElements prend en paramètres globalData (les données globales des recettes), elementFiltrer (les éléments à filtrer), index (l'index du type de filtre), et type (le type de filtre : "ingredient", "ustensil", ou "appliance").
+// Fonction pour créer les éléments de filtre
 function createFilterElements(globalData, elementFiltrer, index, type) {
+  // Sélectionne tous les conteneurs de filtres
   const containerFiltreTagAll = document.querySelectorAll(".container-filtre");
-  const textes = ["Ingrédients", "Ustensiles", "Appareils"]; // Tableau des textes pour chaque type de filtre
+  // Tableau des textes pour chaque type de filtre
+  const textes = ["Ingrédients", "Ustensiles", "Appareils"];
 
   containerFiltreTagAll.forEach((container, idx) => {
     if (idx !== index) return;
@@ -69,28 +70,30 @@ function createFilterElements(globalData, elementFiltrer, index, type) {
     if (!container.classList.contains("initialized")) {
       container.classList.add("initialized");
 
+      // Ajoute le texte approprié au conteneur
       container.textContent = textes[idx % textes.length];
 
+      // Crée l'icône de la flèche pour le filtre
       const SelectFleche = document.createElement("i");
       SelectFleche.classList.add("fa-solid", "fa-chevron-down", "flecheSelect");
       container.appendChild(SelectFleche);
 
+      // Crée un conteneur modal pour les options du filtre
       const divModalSelect = document.createElement("div");
       divModalSelect.classList.add("div-modal-select");
       container.appendChild(divModalSelect);
 
+      // Crée un input pour rechercher dans les options du filtre
       const inputSelect = document.createElement("input");
       inputSelect.classList.add("input-select");
       divModalSelect.appendChild(inputSelect);
 
+      // Crée une icône de loupe pour l'input
       const loupeForInput = document.createElement("i");
-      loupeForInput.classList.add(
-        "fa-solid",
-        "fa-magnifying-glass",
-        "loupe-for-input"
-      );
+      loupeForInput.classList.add("fa-solid", "fa-magnifying-glass", "loupe-for-input");
       divModalSelect.appendChild(loupeForInput);
 
+      // Ajoute un événement pour ouvrir/fermer le modal au clic sur la flèche
       SelectFleche.addEventListener("click", (event) => {
         event.stopPropagation();
         SelectFleche.classList.toggle("fa-chevron-down");
@@ -112,6 +115,7 @@ function createFilterElements(globalData, elementFiltrer, index, type) {
       divModalSelectElement.innerHTML = "";
     }
 
+    // Utilise un Set pour éviter les doublons
     let elementSet = new Set();
     globalData.forEach((element) => {
       let elementsArray = [];
@@ -129,6 +133,7 @@ function createFilterElements(globalData, elementFiltrer, index, type) {
       });
     });
 
+    // Détermine les éléments à utiliser pour le filtre
     const elementsToUse = elementFiltrer && elementFiltrer.length > 0 ? elementFiltrer : Array.from(elementSet);
     elementsToUse.forEach((item) => {
       const pSelectTag = document.createElement("p");
