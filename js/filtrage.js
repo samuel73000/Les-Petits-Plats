@@ -63,7 +63,9 @@ export function filtrageInput(globalData) {
 export function messageErreur() {
   // Sélection de l'élément du DOM où les recettes sont affichées
   const containerRecetteAll = document.querySelector(".container-recette-all");
+  const nombreRecette = document.querySelector(".nombre-recette");
 
   // Mise à jour du contenu HTML du conteneur avec un message d'erreur basé sur la valeur recherchée
+  nombreRecette.textContent = "0 recettes";
   containerRecetteAll.innerHTML = `<div class='message-erreur'>Aucune recette ne contient ‘${value}’ vous pouvez chercher «tarte aux pommes », « poisson », etc.</div>`;
 }
