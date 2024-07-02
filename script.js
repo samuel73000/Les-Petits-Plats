@@ -96,11 +96,6 @@ function init() {
       filtreTagRecetteAppliance(filteredDataMainInput);
     }
 
-
-
-
-
-
     
      // si on filtre avec tag puis avec input et que on supp input on revien au filtre tag
      if (inputHeader.value.length === 0 && filteredDataTag.length !== 0) {
@@ -113,13 +108,8 @@ function init() {
       filtreTagRecetteUstensiles(filteredDataTag);
       filtreTagRecetteAppliance(filteredDataTag);
     }
-
-
-
-
-
-    // si on aucun resulat on affiche un message d'erreur
-    if (filteredDataMainInput.length ===0) {
+     // si on aucun resulat on affiche un message d'erreur
+     if (filteredDataMainInput.length ===0 ) {
       messageErreur(); // Affiche le message d'erreur
       filteredDataMainInput = filtrageInput(filteredDataTag);
 
@@ -128,25 +118,19 @@ function init() {
       SelectFilterTagUstensiles(filteredDataMainInput);
 
       SelectFilterTagAppliance(filteredDataMainInput);
+      filtreTagRecetteIngredient(filteredDataMainInput);
+      filtreTagRecetteUstensiles(filteredDataMainInput);
+      filtreTagRecetteAppliance(filteredDataMainInput);
     }
-
-
-
-
-
-
-    if (
+if (
       inputHeader.value.length <3 &&
       containerFilteredtTag.children.length === 0
     ) {
-      // filteredDataTag = [];
-      filteredDataMainInput = [];
-      filteredDataInputTags = [];
-      displayData(globalData);
-        SelectFilterTagIngredients(globalData);
-        SelectFilterTagUstensiles(globalData);
-        SelectFilterTagAppliance(globalData);
+      window.location.reload();
     }
+
+
+
     ////////ajoute addeventlistener pour les input des tags une fois que on a filter avec main input////////
     document.addEventListener("DOMContentLoaded", () => {
       const inputSubit = document.querySelectorAll(".loupe-for-input");
