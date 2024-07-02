@@ -109,7 +109,7 @@ function init() {
       filtreTagRecetteAppliance(filteredDataTag);
     }
      // si on aucun resulat on affiche un message d'erreur
-     if (filteredDataMainInput.length ===0 ) {
+     if (filteredDataMainInput.length ===0 &&containerFilteredtTag.children.length === 0 ) {
       messageErreur(); // Affiche le message d'erreur
       filteredDataMainInput = filtrageInput(filteredDataTag);
 
