@@ -42,6 +42,7 @@ export function filtrageInput(globalData) {
     ];
   }
 
+  
   // Retourne les données filtrées
   return filteredDataInput;
 }
