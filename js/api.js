@@ -2,7 +2,7 @@
 export async function fetchData() {
   try {
     // Effectue une requête fetch pour obtenir les données depuis le fichier 'recipes.js'
-    const response = await fetch("./recipes.js");
+    const response = await fetch("./recipes.json");
 
     // Vérifie si la réponse n'est pas réussie (status HTTP non 200)
     if (!response.ok) {
