@@ -5,6 +5,11 @@ import {
   SelectFilterTagAppliance,
 } from "./display.js";
 
+
+
+
+
+
 /////////////////////// Filtre des Tags grâce à leur input ////////////////////
 
 // Fonction de filtrage par ingrédients
@@ -97,6 +102,10 @@ export function filtreTagAppliance(data) {
   });
   return filteredAppliances;
 }
+
+
+
+
 
 ////////////////////// Filtrer les recettes grâce aux tags //////////////////////
 export let filteredDataTag = []; // Initialisation des données filtrées
