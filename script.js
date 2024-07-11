@@ -94,7 +94,7 @@ function handleMainInputFilter() {
 
 
 
-  ////////////////////////// input pour les tag //////////////////////
+  ////////////////////////// input pour les tag ////////////////////
   // Ajout des écouteurs d'événements pour les inputs des tags après filtrage principal
   document.addEventListener("DOMContentLoaded", () => {
     const inputSubit = document.querySelectorAll(".loupe-for-input");
